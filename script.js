@@ -3,6 +3,284 @@ const ANIMATION_CURVES = ['sine','quad','cubic','quart','quint','expo','circ','b
 const ANIMATION_SPEEDS = ['in','out','inout']; // speed direction variants
 const DEFAULT_BARS = 40;
 
+/* ------- Theme Definitions ------- */
+const THEMES = {
+  'basic-titanium': {
+    name: 'Natural Titanium',
+    colors: {
+      titaniumDark: '#0a0a0c',
+      titaniumLight: '#18181a',
+      titaniumBorder: 'rgba(192, 192, 192, 0.15)',
+      
+      primaryColor: '#C0C0C0',
+      primaryBright: '#FFFFFF',
+      primarySheen: '#E8E8E8',
+      primaryDeep: '#808080',
+      primaryGlow: 'rgba(192, 192, 192, 0.6)',
+      
+      textMain: '#f5f5f7',
+      textMuted: '#a8a8aa'
+    }
+  },
+  'gothic-gold': {
+    name: 'Gothic Gold',
+    colors: {
+      titaniumDark: '#1a1410',
+      titaniumLight: '#2a2318',
+      titaniumBorder: 'rgba(255, 215, 0, 0.12)',
+      
+      primaryColor: '#FFD700',
+      primaryBright: '#FFFFFF',
+      primarySheen: '#FFF5B7',
+      primaryDeep: '#B8860B',
+      primaryGlow: 'rgba(255, 215, 0, 0.5)',
+      
+      textMain: '#f5f5f7',
+      textMuted: '#c9b896'
+    }
+  },
+  'brilliant-bronze': {
+    name: 'Brilliant Bronze',
+    colors: {
+      titaniumDark: '#1a1310',
+      titaniumLight: '#2a211c',
+      titaniumBorder: 'rgba(205, 127, 50, 0.12)',
+      
+      primaryColor: '#CD7F32',
+      primaryBright: '#F4E4D7',
+      primarySheen: '#E6BC98',
+      primaryDeep: '#8B4513',
+      primaryGlow: 'rgba(205, 127, 50, 0.5)',
+      
+      textMain: '#f5f5f7',
+      textMuted: '#c9a882'
+    }
+  },
+    'desert-titanium': {
+    name: 'Desert Titanium',
+    colors: {
+      titaniumDark: '#1e1b18',
+      titaniumLight: '#2d2824',
+      titaniumBorder: 'rgba(212, 175, 155, 0.15)',
+      primaryColor: '#d4af9b',      // iPhone 16 Pro Desert Gold
+      primaryBright: '#f2e2d9',
+      primarySheen: '#e1c6b8',
+      primaryDeep: '#a67c65',
+      primaryGlow: 'rgba(212, 175, 155, 0.4)',
+      textMain: '#f5f5f7',
+      textMuted: '#9a8e85'
+    }
+  },
+  'midnight-nebula': {
+    name: 'Midnight Nebula',
+    colors: {
+      titaniumDark: '#05050a',
+      titaniumLight: '#0d0d1a',
+      titaniumBorder: 'rgba(138, 43, 226, 0.2)',
+      primaryColor: '#8a2be2',      // Deep Purple
+      primaryBright: '#e0b0ff',
+      primarySheen: '#b388eb',
+      primaryDeep: '#4b0082',
+      primaryGlow: 'rgba(138, 43, 226, 0.6)',
+      textMain: '#ffffff',
+      textMuted: '#8b8bbd'
+    },
+    animated: true
+  },
+  'emerald-isle': {
+    name: 'Emerald Isle',
+    colors: {
+      titaniumDark: '#06110a',
+      titaniumLight: '#0e1f14',
+      titaniumBorder: 'rgba(0, 255, 127, 0.1)',
+      primaryColor: '#00ff7f',      // Spring Green
+      primaryBright: '#ccffea',
+      primarySheen: '#66ffb3',
+      primaryDeep: '#008f47',
+      primaryGlow: 'rgba(0, 255, 127, 0.4)',
+      textMain: '#f0fff4',
+      textMuted: '#7ca68a'
+    }
+  },
+  'cyber-pulse': {
+    name: 'Cyber Pulse',
+    colors: {
+      titaniumDark: '#000000',
+      titaniumLight: '#111111',
+      titaniumBorder: 'rgba(255, 0, 255, 0.2)',
+      primaryColor: '#ff00ff',      // Neon Magenta
+      primaryBright: '#ffffff',
+      primarySheen: '#ff77ff',
+      primaryDeep: '#880088',
+      primaryGlow: 'rgba(255, 0, 255, 0.7)',
+      textMain: '#ffffff',
+      textMuted: '#ff99ff'
+    },
+    animated: true
+  },
+  'frozen-glacier': {
+    name: 'Frozen Glacier',
+    colors: {
+      titaniumDark: '#0f172a',
+      titaniumLight: '#1e293b',
+      titaniumBorder: 'rgba(186, 230, 253, 0.2)',
+      primaryColor: '#7dd3fc',      // Sky Blue
+      primaryBright: '#f0f9ff',
+      primarySheen: '#bae6fd',
+      primaryDeep: '#0369a1',
+      primaryGlow: 'rgba(125, 211, 252, 0.5)',
+      textMain: '#f8fafc',
+      textMuted: '#94a3b8'
+    }
+  },
+  'crimson-stealth': {
+    name: 'Crimson Stealth',
+    colors: {
+      titaniumDark: '#120000',
+      titaniumLight: '#220000',
+      titaniumBorder: 'rgba(255, 0, 0, 0.15)',
+      primaryColor: '#ff3131',      // Racing Red
+      primaryBright: '#ffcccc',
+      primarySheen: '#ff6666',
+      primaryDeep: '#800000',
+      primaryGlow: 'rgba(255, 49, 49, 0.5)',
+      textMain: '#ffffff',
+      textMuted: '#a67b7b'
+    }
+  },
+  'rolex-everose': {
+    name: 'Rolex Everose',
+    colors: {
+      titaniumDark: '#1c1716',
+      titaniumLight: '#292321',
+      titaniumBorder: 'rgba(224, 172, 155, 0.1)',
+      primaryColor: '#e0ac9b',      // Luxury Rose Gold
+      primaryBright: '#f5e1da',
+      primarySheen: '#ead2c9',
+      primaryDeep: '#a8796a',
+      primaryGlow: 'rgba(224, 172, 155, 0.3)',
+      textMain: '#fffaf8',
+      textMuted: '#9c8d88'
+    }
+  },
+  'obsidian-black': {
+    name: 'Obsidian Black',
+    colors: {
+      titaniumDark: '#080808',
+      titaniumLight: '#121212',
+      titaniumBorder: 'rgba(255, 255, 255, 0.05)',
+      primaryColor: '#444444',      // Gunmetal Gray
+      primaryBright: '#999999',
+      primarySheen: '#666666',
+      primaryDeep: '#222222',
+      primaryGlow: 'rgba(255, 255, 255, 0.1)',
+      textMain: '#ffffff',
+      textMuted: '#666666'
+    }
+  },
+  'solar-flare': {
+    name: 'Solar Flare',
+    colors: {
+      titaniumDark: '#1a0f00',
+      titaniumLight: '#2a1a00',
+      titaniumBorder: 'rgba(255, 165, 0, 0.2)',
+      primaryColor: '#ffa500',      // Orange Gold
+      primaryBright: '#fff4e0',
+      primarySheen: '#ffcc66',
+      primaryDeep: '#cc8400',
+      primaryGlow: 'rgba(255, 165, 0, 0.5)',
+      textMain: '#fffaf0',
+      textMuted: '#a69580'
+    },
+    animated: true
+  },
+  'rainbow-pulse': {
+    name: 'Rainbow Pulse',
+    animated: true,
+    cycleTime: 1000, // 1 second per color
+    colorCycle: [
+      {
+        primaryColor: '#FF0000',      // Red
+        primaryBright: '#FFFFFF',
+        primarySheen: '#FF9999',
+        primaryDeep: '#CC0000',
+        primaryGlow: 'rgba(255, 0, 0, 0.5)'
+      },
+      {
+        primaryColor: '#FF8800',      // Orange
+        primaryBright: '#FFFFFF',
+        primarySheen: '#FFCC99',
+        primaryDeep: '#CC6600',
+        primaryGlow: 'rgba(255, 136, 0, 0.5)'
+      },
+      {
+        primaryColor: '#FFFF00',      // Yellow
+        primaryBright: '#FFFFFF',
+        primarySheen: '#FFFF99',
+        primaryDeep: '#CCCC00',
+        primaryGlow: 'rgba(255, 255, 0, 0.5)'
+      },
+      {
+        primaryColor: '#88FF00',      // Lime
+        primaryBright: '#FFFFFF',
+        primarySheen: '#CCFF99',
+        primaryDeep: '#66CC00',
+        primaryGlow: 'rgba(136, 255, 0, 0.5)'
+      },
+      {
+        primaryColor: '#00FF00',      // Green
+        primaryBright: '#FFFFFF',
+        primarySheen: '#99FF99',
+        primaryDeep: '#00CC00',
+        primaryGlow: 'rgba(0, 255, 0, 0.5)'
+      },
+      {
+        primaryColor: '#0088FF',      // Blue
+        primaryBright: '#FFFFFF',
+        primarySheen: '#99CCFF',
+        primaryDeep: '#0066CC',
+        primaryGlow: 'rgba(0, 136, 255, 0.5)'
+      },
+      {
+        primaryColor: '#00FFFF',      // Cyan
+        primaryBright: '#FFFFFF',
+        primarySheen: '#99FFFF',
+        primaryDeep: '#00CCCC',
+        primaryGlow: 'rgba(0, 255, 255, 0.5)'
+      },
+      {
+        primaryColor: '#FF00FF',      // Pink/Magenta
+        primaryBright: '#FFFFFF',
+        primarySheen: '#FF99FF',
+        primaryDeep: '#CC00CC',
+        primaryGlow: 'rgba(255, 0, 255, 0.5)'
+      },
+      {
+        primaryColor: '#8800FF',      // Purple
+        primaryBright: '#FFFFFF',
+        primarySheen: '#CC99FF',
+        primaryDeep: '#6600CC',
+        primaryGlow: 'rgba(136, 0, 255, 0.5)'
+      }
+    ],
+    colors: {
+      titaniumDark: '#0f0f11',
+      titaniumLight: '#1a1a1c',
+      titaniumBorder: 'rgba(255, 255, 255, 0.08)',
+      
+      // Starting with red
+      primaryColor: '#FF0000',
+      primaryBright: '#FFFFFF',
+      primarySheen: '#FF9999',
+      primaryDeep: '#CC0000',
+      primaryGlow: 'rgba(255, 0, 0, 0.5)',
+      
+      textMain: '#f5f5f7',
+      textMuted: '#a1a1a6'
+    }
+  },
+};
+
 /* Map named curves to easing strings suitable for CSS/Web Animations.
    These are approximations — chosen to represent the named curves.
 */
@@ -74,7 +352,10 @@ const state = {
   analyser: null,
   audioContext: null,
   sourceNode: null,
-  rafId: null
+  rafId: null,
+  currentTheme: 'gothic-gold', // Default theme (matches the original design)
+  rainbowInterval: null,
+  rainbowIndex: 0
 };
 
 /* ------- Elements ------- */
@@ -98,6 +379,12 @@ const visualiser = document.getElementById('visualiser');
 const animLabel = document.getElementById('animLabel');
 const curveLabel = document.getElementById('curveLabel');
 const liquidBlob = document.getElementById('liquidBlob');
+const themeBtn = document.getElementById('themeBtn');
+const themePanel = document.getElementById('themePanel');
+const themeList = document.getElementById('themeList');
+const themeImportInput = document.getElementById('themeImportInput');
+
+state.isChangingTheme = false
 
 /* ------- Utilities ------- */
 function fmtTime(s){
@@ -140,10 +427,13 @@ function initRandomAnimations(){
 
   // Pulse the play button glow slightly with random timing
   const playPulseDuration = 1600 + Math.floor(Math.random()*2400);
+  const theme = THEMES[state.currentTheme];
+  const glowColor = theme.colors.primaryGlow;
+  
   playBtn.animate([
-    { boxShadow: '0 14px 40px rgba(0,160,255,0.12), 0 0 0 0 rgba(0,160,255,0.0)' },
-    { boxShadow: '0 18px 48px rgba(0,160,255,0.20), 0 0 40px 8px rgba(0,160,255,0.06)' },
-    { boxShadow: '0 14px 40px rgba(0,160,255,0.12), 0 0 0 0 rgba(0,160,255,0.0)' }
+    { boxShadow: `0 14px 40px ${glowColor.replace('0.5', '0.12')}, 0 0 0 0 ${glowColor.replace('0.5', '0.0')}` },
+    { boxShadow: `0 18px 48px ${glowColor.replace('0.5', '0.20')}, 0 0 40px 8px ${glowColor.replace('0.5', '0.06')}` },
+    { boxShadow: `0 14px 40px ${glowColor.replace('0.5', '0.12')}, 0 0 0 0 ${glowColor.replace('0.5', '0.0')}` }
   ],{
     duration: playPulseDuration,
     iterations: Infinity,
@@ -231,13 +521,19 @@ function addTrackToPlaylist(track){
 }
 
 function renderPlaylist() {
+  // Store existing tracks with their hash to identify which are new
+  const existingTracks = Array.from(playlistEl.querySelectorAll('.track'));
+  const existingHashes = new Set(existingTracks.map(el => el.dataset.trackHash));
+  
   playlistEl.innerHTML = '';
 
   state.playlist.forEach((track, index) => {
+    const isNewTrack = !existingHashes.has(track.hash);
     const el = document.createElement('div');
     el.className = 'track' + (index === state.currentIndex ? ' active' : '');
     el.tabIndex = 0;
     el.style.position = 'relative'; // for trash icon positioning
+    el.dataset.trackHash = track.hash; // Store hash to identify this track later
 
     // Track content
     el.innerHTML = `
@@ -280,9 +576,14 @@ function renderPlaylist() {
       scrollActiveTrackIntoView();
     });
 
-    // Double-tap / double-click: remove track
+    // Right-click: remove track
+    el.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      removeTrack(index);
+    });
+
+    // Double-tap on mobile: remove track
     let lastTap = 0;
-    el.addEventListener('dblclick', () => removeTrack(index));
     el.addEventListener('touchend', (e) => {
       const currentTime = new Date().getTime();
       const tapLength = currentTime - lastTap;
@@ -291,6 +592,114 @@ function renderPlaylist() {
         e.preventDefault();
       }
       lastTap = currentTime;
+    });
+
+    // Drag and drop reordering (Desktop)
+    el.draggable = true;
+    
+    el.addEventListener('dragstart', (e) => {
+      el.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', index);
+    });
+    
+    el.addEventListener('dragend', () => {
+      el.classList.remove('dragging');
+      document.querySelectorAll('.track').forEach(t => t.classList.remove('drag-over'));
+    });
+    
+    el.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      
+      const dragging = document.querySelector('.dragging');
+      if (dragging && dragging !== el) {
+        el.classList.add('drag-over');
+      }
+    });
+    
+    el.addEventListener('dragleave', () => {
+      el.classList.remove('drag-over');
+    });
+    
+    el.addEventListener('drop', (e) => {
+      e.preventDefault();
+      el.classList.remove('drag-over');
+      
+      const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+      const toIndex = index;
+      
+      if (fromIndex !== toIndex) {
+        reorderTrack(fromIndex, toIndex);
+      }
+    });
+
+    // Touch drag and drop (Mobile)
+    let longPressTimer = null;
+    let isDragging = false;
+    let dragStartY = 0;
+    let dragCurrentY = 0;
+    let originalIndex = index;
+    
+    el.addEventListener('touchstart', (e) => {
+      if (isSwiping) return;
+      
+      dragStartY = e.touches[0].clientY;
+      
+      longPressTimer = setTimeout(() => {
+        isDragging = true;
+        el.classList.add('dragging');
+        el.style.zIndex = '1000';
+        // Haptic feedback if available
+        if (navigator.vibrate) navigator.vibrate(50);
+      }, 800); // Hold for 800ms to start dragging
+    }, { passive: true });
+    
+    el.addEventListener('touchmove', (e) => {
+      if (!isDragging) {
+        clearTimeout(longPressTimer);
+        return;
+      }
+      
+      dragCurrentY = e.touches[0].clientY;
+      const deltaY = dragCurrentY - dragStartY;
+      
+      el.style.transform = `translateY(${deltaY}px)`;
+      el.style.opacity = '0.8';
+      
+      // Find which track we're hovering over
+      const tracks = Array.from(playlistEl.querySelectorAll('.track'));
+      tracks.forEach(t => t.classList.remove('drag-over'));
+      
+      const rect = el.getBoundingClientRect();
+      const centerY = rect.top + rect.height / 2;
+      
+      tracks.forEach((track, idx) => {
+        if (track === el) return;
+        const trackRect = track.getBoundingClientRect();
+        if (centerY > trackRect.top && centerY < trackRect.bottom) {
+          track.classList.add('drag-over');
+          originalIndex = idx;
+        }
+      });
+    });
+    
+    el.addEventListener('touchend', () => {
+      clearTimeout(longPressTimer);
+      
+      if (isDragging) {
+        isDragging = false;
+        el.classList.remove('dragging');
+        el.style.transform = '';
+        el.style.opacity = '';
+        el.style.zIndex = '';
+        
+        document.querySelectorAll('.track').forEach(t => t.classList.remove('drag-over'));
+        
+        if (originalIndex !== index) {
+          reorderTrack(index, originalIndex);
+        }
+      }
     });
 
     // Swipe handling
@@ -335,7 +744,7 @@ function renderPlaylist() {
           // Animate out and remove
           el.style.transform = `translateX(${dx > 0 ? 500 : -500}px)`;
           el.style.opacity = '0';
-          setTimeout(() => removeTrack(index), 300);
+          setTimeout(() => removeTrack(index, true), 300);
         } else {
           // Snap back
           el.style.transform = 'translateX(0)';
@@ -347,33 +756,199 @@ function renderPlaylist() {
     });
 
     playlistEl.appendChild(el);
-    animateTrackIn(el);
+    
+    // ONLY animate new tracks, not existing ones
+    if (isNewTrack) {
+      animateTrackIn(el);
+    }
   });
 }
 
-function removeTrack(index){
+function removeTrack(index, skipAnimation = false){
   const isCurrent = index === state.currentIndex;
+  
+  // Find the track element to animate
+  const trackElements = Array.from(playlistEl.querySelectorAll('.track'));
+  const trackEl = trackElements[index];
+  
+  if(trackEl && !skipAnimation){
+    // Animate the track out before removing
+    const effects = ['fade', 'slide-left', 'slide-right', 'scale'];
+    const effect = effects[Math.floor(Math.random() * effects.length)];
+    const duration = 300;
+    const curve = chooseRandom(ANIMATION_CURVES);
+    const speed = chooseRandom(ANIMATION_SPEEDS);
+    const easing = (EASING_MAP[curve] && EASING_MAP[curve][speed]) || 'ease-in';
+    
+    let keyframes = [];
+    switch(effect) {
+      case 'fade': 
+        keyframes = [{ opacity: 1 }, { opacity: 0 }]; 
+        break;
+      case 'slide-left': 
+        keyframes = [
+          { transform: 'translateX(0)', opacity: 1 }, 
+          { transform: 'translateX(-50px)', opacity: 0 }
+        ]; 
+        break;
+      case 'slide-right': 
+        keyframes = [
+          { transform: 'translateX(0)', opacity: 1 }, 
+          { transform: 'translateX(50px)', opacity: 0 }
+        ]; 
+        break;
+      case 'scale': 
+        keyframes = [
+          { transform: 'scale(1)', opacity: 1 }, 
+          { transform: 'scale(0.8)', opacity: 0 }
+        ]; 
+        break;
+    }
+    
+    const animation = trackEl.animate(keyframes, { duration, easing, fill: 'forwards' });
+    
+    animation.onfinish = () => {
+      // After animation completes, update the state and re-render
+      if(isCurrent){
+        stopAudio();
+        state.audio.src = '';
+        titleEl.textContent = 'No song loaded';
+        artistEl.textContent = 'Drop an audio file';
+        albumArtImg.style.display = 'none';
+        musicNoteSVG.style.display = 'block';
+        seekRange.value = 0;
+        buildVisualiserBars(state.visualBars);
+      }
 
-  if(isCurrent){
-    stopAudio();
-    state.audio.src = '';
-    titleEl.textContent = 'No song loaded';
-    artistEl.textContent = 'Drop an audio file';
-    albumArtImg.style.display = 'none';
-    musicNoteSVG.style.display = 'block';
-    seekRange.value = 0;
-    buildVisualiserBars(state.visualBars);
+      state.playlist.splice(index, 1);
+
+      if(state.currentIndex > index){
+        state.currentIndex--;
+      } else if(isCurrent){
+        state.currentIndex = -1;
+      }
+
+      renderPlaylist();
+    };
+  } else {
+    // No animation - immediate removal (for swipe or if element not found)
+    if(isCurrent){
+      stopAudio();
+      state.audio.src = '';
+      titleEl.textContent = 'No song loaded';
+      artistEl.textContent = 'Drop an audio file';
+      albumArtImg.style.display = 'none';
+      musicNoteSVG.style.display = 'block';
+      seekRange.value = 0;
+      buildVisualiserBars(state.visualBars);
+    }
+
+    state.playlist.splice(index, 1);
+
+    if(state.currentIndex > index){
+      state.currentIndex--;
+    } else if(isCurrent){
+      state.currentIndex = -1;
+    }
+
+    renderPlaylist();
   }
+}
 
-  state.playlist.splice(index, 1);
-
-  if(state.currentIndex > index){
-    state.currentIndex--;
-  } else if(isCurrent){
-    state.currentIndex = -1;
+function reorderTrack(fromIndex, toIndex) {
+  // Get the track element being moved
+  const trackElements = Array.from(playlistEl.querySelectorAll('.track'));
+  const movingTrack = trackElements[fromIndex];
+  
+  if (movingTrack) {
+    // Animate the track moving to its new position
+    const duration = 400;
+    const curve = chooseRandom(ANIMATION_CURVES);
+    const speed = chooseRandom(ANIMATION_SPEEDS);
+    const easing = (EASING_MAP[curve] && EASING_MAP[curve][speed]) || 'ease-out';
+    
+    // Calculate the vertical distance to animate
+    const fromRect = movingTrack.getBoundingClientRect();
+    
+    // Update the playlist order first
+    const [track] = state.playlist.splice(fromIndex, 1);
+    state.playlist.splice(toIndex, 0, track);
+    
+    // Update current index if needed
+    if (state.currentIndex === fromIndex) {
+      state.currentIndex = toIndex;
+    } else if (fromIndex < state.currentIndex && toIndex >= state.currentIndex) {
+      state.currentIndex--;
+    } else if (fromIndex > state.currentIndex && toIndex <= state.currentIndex) {
+      state.currentIndex++;
+    }
+    
+    // Re-render to get new positions
+    renderPlaylist();
+    
+    // Get the new position
+    const newTrackElements = Array.from(playlistEl.querySelectorAll('.track'));
+    const newTrack = newTrackElements[toIndex];
+    
+    if (newTrack) {
+      const toRect = newTrack.getBoundingClientRect();
+      const deltaY = fromRect.top - toRect.top;
+      
+      // Animate from old position to new position
+      newTrack.animate([
+        { 
+          transform: `translateY(${deltaY}px)`,
+          opacity: 0.8
+        },
+        { 
+          transform: 'translateY(0)',
+          opacity: 1
+        }
+      ], {
+        duration,
+        easing,
+        fill: 'both'
+      });
+      
+      // Also animate the tracks that shifted
+      newTrackElements.forEach((t, idx) => {
+        if (idx === toIndex) return; // Skip the main track
+        
+        // Animate tracks that were displaced
+        if ((fromIndex < toIndex && idx > fromIndex && idx <= toIndex) ||
+            (fromIndex > toIndex && idx >= toIndex && idx < fromIndex)) {
+          t.animate([
+            { 
+              transform: fromIndex < toIndex ? 'translateY(-40px)' : 'translateY(40px)',
+              opacity: 0.9
+            },
+            { 
+              transform: 'translateY(0)',
+              opacity: 1
+            }
+          ], {
+            duration: duration * 0.7,
+            easing,
+            fill: 'both'
+          });
+        }
+      });
+    }
+  } else {
+    // Fallback without animation
+    const [track] = state.playlist.splice(fromIndex, 1);
+    state.playlist.splice(toIndex, 0, track);
+    
+    if (state.currentIndex === fromIndex) {
+      state.currentIndex = toIndex;
+    } else if (fromIndex < state.currentIndex && toIndex >= state.currentIndex) {
+      state.currentIndex--;
+    } else if (fromIndex > state.currentIndex && toIndex <= state.currentIndex) {
+      state.currentIndex++;
+    }
+    
+    renderPlaylist();
   }
-
-  renderPlaylist();
 }
 
 function animateTrackIn(el) {
@@ -802,3 +1377,471 @@ setupMultiTapButton(fwdBtn,
     jumpToNext();
   }
 );
+
+/* ------- Theme System ------- */
+function startRainbowAnimation() {
+  // Stop any existing rainbow animation
+  stopRainbowAnimation();
+  
+  const theme = THEMES[state.currentTheme];
+  if (!theme.animated || !theme.colorCycle) return;
+  
+  const cycleTime = theme.cycleTime || 1000;
+  const totalColors = theme.colorCycle.length;
+  let startTime = Date.now();
+  
+  // Helper function to interpolate between two hex colors
+  function interpolateColor(color1, color2, factor) {
+    // Convert hex to RGB
+    const hex1 = color1.replace('#', '');
+    const hex2 = color2.replace('#', '');
+    
+    const r1 = parseInt(hex1.substring(0, 2), 16);
+    const g1 = parseInt(hex1.substring(2, 4), 16);
+    const b1 = parseInt(hex1.substring(4, 6), 16);
+    
+    const r2 = parseInt(hex2.substring(0, 2), 16);
+    const g2 = parseInt(hex2.substring(2, 4), 16);
+    const b2 = parseInt(hex2.substring(4, 6), 16);
+    
+    // Linear interpolation
+    const r = Math.round(r1 + (r2 - r1) * factor);
+    const g = Math.round(g1 + (g2 - g1) * factor);
+    const b = Math.round(b1 + (b2 - b1) * factor);
+    
+    return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+  }
+  
+  // Helper to create rgba from hex and opacity
+  function hexToRgba(hex, opacity) {
+    const r = parseInt(hex.substring(1, 3), 16);
+    const g = parseInt(hex.substring(3, 5), 16);
+    const b = parseInt(hex.substring(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  }
+  
+  function updateColors() {
+    const elapsed = Date.now() - startTime;
+    const totalCycleTime = cycleTime * totalColors;
+    const normalizedTime = (elapsed % totalCycleTime) / totalCycleTime;
+    
+    // Calculate which two colors we're interpolating between
+    const colorPosition = normalizedTime * totalColors;
+    const currentIndex = Math.floor(colorPosition);
+    const nextIndex = (currentIndex + 1) % totalColors;
+    const factor = colorPosition - currentIndex;
+    
+    const currentColor = theme.colorCycle[currentIndex];
+    const nextColor = theme.colorCycle[nextIndex];
+    
+    // Interpolate all color properties
+    const primaryColor = interpolateColor(currentColor.primaryColor, nextColor.primaryColor, factor);
+    const primarySheen = interpolateColor(currentColor.primarySheen, nextColor.primarySheen, factor);
+    const primaryDeep = interpolateColor(currentColor.primaryDeep, nextColor.primaryDeep, factor);
+    const primaryGlow = hexToRgba(primaryColor, 0.5);
+    
+    const root = document.documentElement;
+    
+    // Apply interpolated colors
+    root.style.setProperty('--gold-primary', primaryColor);
+    root.style.setProperty('--gold-bright', '#FFFFFF');
+    root.style.setProperty('--gold-sheen', primarySheen);
+    root.style.setProperty('--gold-deep', primaryDeep);
+    root.style.setProperty('--gold-glow', primaryGlow);
+    
+    // Continue animation
+    state.rainbowInterval = requestAnimationFrame(updateColors);
+  }
+  
+  // Start the animation loop
+  updateColors();
+  
+  // Update play button animation initially
+  setTimeout(() => {
+    updatePlayButtonAnimation();
+  }, 100);
+}
+
+function stopRainbowAnimation() {
+  if (state.rainbowInterval) {
+    cancelAnimationFrame(state.rainbowInterval);
+    state.rainbowInterval = null;
+  }
+}
+
+function updatePlayButtonAnimation() {
+  // Cancel existing animation
+  const animations = playBtn.getAnimations();
+  animations.forEach(anim => {
+    if (anim.effect && anim.effect.getKeyframes) {
+      const keyframes = anim.effect.getKeyframes();
+      if (keyframes.some(kf => kf.boxShadow)) {
+        anim.cancel();
+      }
+    }
+  });
+  
+  // Create new animation with current theme color
+  const playPulseDuration = 1600 + Math.floor(Math.random()*2400);
+  const theme = THEMES[state.currentTheme];
+  const glowColor = theme.colors.primaryGlow;
+  const curve = state.animCurve || 'sine';
+  const speed = state.animSpeed || 'inout';
+  const easing = (EASING_MAP[curve] && EASING_MAP[curve][speed]) || 'cubic-bezier(.33,.66,.66,1)';
+  
+  // Parse the glow color to extract RGB values
+  let baseColor = glowColor;
+  
+  // Function to create shadow with specific opacity
+  const createShadow = (opacity1, opacity2) => {
+    // Replace the opacity value in rgba
+    const shadow1 = baseColor.replace(/[\d.]+\)$/, opacity1 + ')');
+    const shadow2 = baseColor.replace(/[\d.]+\)$/, opacity2 + ')');
+    return `0 14px 40px ${shadow1}, 0 0 0 0 ${shadow2}`;
+  };
+  
+  playBtn.animate([
+    { boxShadow: createShadow(0.12, 0.0) },
+    { boxShadow: `0 18px 48px ${baseColor.replace(/[\d.]+\)$/, '0.20)')}, 0 0 40px 8px ${baseColor.replace(/[\d.]+\)$/, '0.06)')}` },
+    { boxShadow: createShadow(0.12, 0.0) }
+  ],{
+    duration: playPulseDuration,
+    iterations: Infinity,
+    easing: easing
+  });
+}
+
+function applyTheme(themeKey, animate = true) {
+  const theme = THEMES[themeKey];
+  if (!theme || state.isThemeChanging) return;
+
+  // Use the global transition overlay
+  let overlay = document.getElementById('theme-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'theme-overlay';
+    document.body.appendChild(overlay);
+    
+    // Initial Styles for Overlay
+    Object.assign(overlay.style, {
+      position: 'fixed',
+      inset: '0',
+      zIndex: '10000', // Higher than theme panel
+      backdropFilter: 'blur(0px)',
+      backgroundColor: 'rgba(0,0,0,0)',
+      pointerEvents: 'none',
+      transition: 'backdrop-filter 0.6s ease, background-color 0.6s ease'
+    });
+  }
+
+  if (animate) {
+    state.isThemeChanging = true;
+    overlay.style.backdropFilter = 'blur(30px)';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0.3)';
+    overlay.style.pointerEvents = 'auto'; // Locks clicks
+
+    // Mid-point: Change colors while screen is fully blurred
+    setTimeout(() => {
+      executeColorSwap(themeKey, theme);
+      
+      // Fade out
+      overlay.style.backdropFilter = 'blur(0px)';
+      overlay.style.backgroundColor = 'rgba(0,0,0,0)';
+      overlay.style.pointerEvents = 'none';
+
+      setTimeout(() => {
+        state.isThemeChanging = false;
+      }, 600);
+    }, 400);
+  } else {
+    executeColorSwap(themeKey, theme);
+  }
+}
+
+function executeColorSwap(themeKey, theme) {
+  const root = document.documentElement;
+  const colors = theme.colors;
+  
+  state.currentTheme = themeKey;
+
+  // Map theme colors to CSS variables
+  root.style.setProperty('--titanium-dark', colors.titaniumDark);
+  root.style.setProperty('--titanium-light', colors.titaniumLight);
+  root.style.setProperty('--gold-primary', colors.primaryColor);
+  root.style.setProperty('--gold-bright', colors.primaryBright);
+  root.style.setProperty('--gold-deep', colors.primaryDeep);
+  root.style.setProperty('--gold-glow', colors.primaryGlow);
+  root.style.setProperty('--gold-sheen', colors.primarySheen);
+  root.style.setProperty('--text-main', colors.textMain);
+  root.style.setProperty('--text-muted', colors.textMuted);
+
+  // Manage animations
+  stopRainbowAnimation();
+  if (theme.animated) startRainbowAnimation();
+  
+  updateThemeListUI();
+  localStorage.setItem('selectedTheme', themeKey);
+}
+
+function performThemeVariableSwap(themeKey, theme) {
+  const root = document.documentElement;
+  const colors = theme.colors;
+  
+  state.currentTheme = themeKey;
+  
+  // These variables now control the playback circle too
+  root.style.setProperty('--gold-primary', colors.primaryColor);
+  root.style.setProperty('--gold-bright', colors.primaryBright);
+  root.style.setProperty('--gold-deep', colors.primaryDeep);
+  root.style.setProperty('--gold-glow', colors.primaryGlow);
+  root.style.setProperty('--gold-sheen', colors.primarySheen);
+  
+  // Update other UI elements
+  updateThemeListUI();
+  localStorage.setItem('selectedTheme', themeKey);
+}
+
+function exportTheme(themeKey) {
+  const theme = THEMES[themeKey];
+  if (!theme) return;
+  
+  const themeData = JSON.stringify(theme, null, 2);
+  const blob = new Blob([themeData], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${themeKey}-theme.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importTheme(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const themeData = JSON.parse(e.target.result);
+      
+      // Validate theme structure
+      if (!themeData.name || !themeData.colors) {
+        alert('Invalid theme file format');
+        return;
+      }
+      
+      // Generate a unique key
+      const themeKey = 'custom-' + Date.now();
+      THEMES[themeKey] = themeData;
+      
+      // Render the new theme in the list
+      renderThemeList();
+      
+      // Apply the imported theme
+      applyTheme(themeKey, true);
+      
+    } catch (error) {
+      alert('Error parsing theme file: ' + error.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function renderThemeList() {
+  themeList.innerHTML = '';
+  
+  Object.keys(THEMES).forEach(themeKey => {
+    const theme = THEMES[themeKey];
+    const themeItem = document.createElement('div');
+    themeItem.className = 'theme-item' + (state.currentTheme === themeKey ? ' active' : '');
+    themeItem.dataset.themeKey = themeKey;
+    
+    // Create color preview
+    const preview = document.createElement('div');
+    preview.className = 'theme-preview';
+    
+    // Special rainbow gradient for animated theme
+    if (theme.animated && theme.colorCycle) {
+      preview.style.background = `linear-gradient(135deg, #FF0000, #FF8800, #FFFF00, #88FF00, #00FF00, #0088FF, #00FFFF, #FF00FF, #8800FF)`;
+      preview.style.backgroundSize = '200% 200%';
+      preview.style.animation = 'rainbow-preview 3s linear infinite';
+    } else {
+      preview.style.background = `linear-gradient(135deg, ${theme.colors.primaryColor}, ${theme.colors.primaryDeep})`;
+    }
+    
+    const name = document.createElement('div');
+    name.className = 'theme-name';
+    name.textContent = theme.name;
+    
+    themeItem.appendChild(preview);
+    themeItem.appendChild(name);
+    
+    // Left click: apply theme
+    themeItem.addEventListener('click', (e) => {
+      applyTheme(themeKey, true);
+    });
+    
+    // Right click: export theme
+    themeItem.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      exportTheme(themeKey);
+    });
+    
+    themeList.appendChild(themeItem);
+  });
+  
+  // Add import button
+  const importBtn = document.createElement('div');
+  importBtn.className = 'theme-item import-theme';
+  importBtn.innerHTML = `
+    <div class="theme-preview" style="background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 2px dashed rgba(255,255,255,0.3);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+      </svg>
+    </div>
+    <div class="theme-name">Import Theme</div>
+  `;
+  
+  importBtn.addEventListener('click', () => {
+    themeImportInput.click();
+  });
+  
+  themeList.appendChild(importBtn);
+}
+
+function setTheme(themeKey) {
+  if (state.isChangingTheme) return; // Block if already transitioning
+  
+  const theme = THEMES[themeKey];
+  if (!theme) return;
+
+  state.isChangingTheme = true;
+  const player = document.querySelector('.player');
+  const duration = 600; // Matches --transition-duration in CSS
+
+  // 1. Start Blur
+  player.classList.add('blur-transition');
+
+  // 2. Wait for the blur to reach maximum (halfway through the duration)
+  setTimeout(() => {
+    // 3. Apply the theme colors while screen is blurred
+    state.currentTheme = themeKey;
+    applyThemeColors(theme);
+    updateThemeListUI();
+
+    // 4. Remove blur
+    player.classList.remove('blur-transition');
+
+    // 5. Unlock theme switching after transition finishes
+    setTimeout(() => {
+      state.isChangingTheme = false;
+    }, duration / 2);
+
+  }, duration / 2);
+}
+
+function updateThemeListUI() {
+  const items = document.querySelectorAll('.theme-item');
+  items.forEach(item => {
+    // Check if the dataset matches the current state
+    if (item.dataset.themeKey === state.currentTheme) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+}
+
+function toggleThemePanel() {
+  const isOpen = themePanel.classList.contains('open');
+  
+  if (isOpen) {
+    themePanel.classList.remove('open');
+    themeBtn.classList.remove('active');
+  } else {
+    themePanel.classList.add('open');
+    themeBtn.classList.add('active');
+  }
+}
+
+function applyTheme(themeKey, animate = true) {
+  const theme = THEMES[themeKey];
+  if (!theme || state.isTransitioning) return; // Prevent overlapping transitions
+
+  const root = document.documentElement;
+  const player = document.querySelector('.player');
+
+  if (animate) {
+    state.isTransitioning = true;
+    player.classList.add('theme-transitioning');
+
+    // Wait for the blur to reach its peak before swapping colors
+    setTimeout(() => {
+      performThemeSwap(themeKey, theme);
+      
+      // Remove blur
+      player.classList.remove('theme-transitioning');
+      
+      // Unlock after the blur fades out
+      setTimeout(() => {
+        state.isTransitioning = false;
+      }, 600);
+    }, 300); 
+  } else {
+    performThemeSwap(themeKey, theme);
+  }
+}
+
+// Helper to handle the actual variable swapping
+function performThemeSwap(themeKey, theme) {
+  const root = document.documentElement;
+  const colors = theme.colors;
+  
+  stopRainbowAnimation();
+  state.currentTheme = themeKey;
+
+  root.style.setProperty('--titanium-dark', colors.titaniumDark);
+  root.style.setProperty('--titanium-light', colors.titaniumLight);
+  root.style.setProperty('--titanium-border', colors.titaniumBorder);
+  root.style.setProperty('--gold-primary', colors.primaryColor);
+  root.style.setProperty('--gold-bright', colors.primaryBright);
+  root.style.setProperty('--gold-sheen', colors.primarySheen);
+  root.style.setProperty('--gold-deep', colors.primaryDeep);
+  root.style.setProperty('--gold-glow', colors.primaryGlow);
+  root.style.setProperty('--text-main', colors.textMain);
+  root.style.setProperty('--text-muted', colors.textMuted);
+
+  updatePlayButtonAnimation();
+  if (theme.animated) startRainbowAnimation();
+  
+  localStorage.setItem('selectedTheme', themeKey);
+  updateThemeListUI();
+}
+
+// Theme button event listener
+themeBtn.addEventListener('click', toggleThemePanel);
+
+// Theme import input handler
+themeImportInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    importTheme(file);
+  }
+  themeImportInput.value = '';
+});
+
+// Close theme panel when clicking outside
+document.addEventListener('click', (e) => {
+  if (!themePanel.contains(e.target) && !themeBtn.contains(e.target)) {
+    if (themePanel.classList.contains('open')) {
+      toggleThemePanel();
+    }
+  }
+});
+
+// Initialize theme system
+document.addEventListener('DOMContentLoaded', () => {
+  // Load saved theme or use default
+  const savedTheme = localStorage.getItem('selectedTheme') || state.currentTheme;
+  applyTheme(savedTheme, false);
+  renderThemeList();
+});
