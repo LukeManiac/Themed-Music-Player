@@ -1443,11 +1443,11 @@ function startRainbowAnimation() {
     const root = document.documentElement;
     
     // Apply interpolated colors
-    root.style.setProperty('--gold-primary', primaryColor);
-    root.style.setProperty('--gold-bright', '#FFFFFF');
-    root.style.setProperty('--gold-sheen', primarySheen);
-    root.style.setProperty('--gold-deep', primaryDeep);
-    root.style.setProperty('--gold-glow', primaryGlow);
+    root.style.setProperty('--color-primary', primaryColor);
+    root.style.setProperty('--color-bright', '#FFFFFF');
+    root.style.setProperty('--color-sheen', primarySheen);
+    root.style.setProperty('--color-deep', primaryDeep);
+    root.style.setProperty('--color-glow', primaryGlow);
     
     // Continue animation
     state.rainbowInterval = requestAnimationFrame(updateColors);
@@ -1567,11 +1567,11 @@ function executeColorSwap(themeKey, theme) {
   // Map theme colors to CSS variables
   root.style.setProperty('--titanium-dark', colors.titaniumDark);
   root.style.setProperty('--titanium-light', colors.titaniumLight);
-  root.style.setProperty('--gold-primary', colors.primaryColor);
-  root.style.setProperty('--gold-bright', colors.primaryBright);
-  root.style.setProperty('--gold-deep', colors.primaryDeep);
-  root.style.setProperty('--gold-glow', colors.primaryGlow);
-  root.style.setProperty('--gold-sheen', colors.primarySheen);
+  root.style.setProperty('--color-primary', colors.primaryColor);
+  root.style.setProperty('--color-bright', colors.primaryBright);
+  root.style.setProperty('--color-deep', colors.primaryDeep);
+  root.style.setProperty('--color-glow', colors.primaryGlow);
+  root.style.setProperty('--color-sheen', colors.primarySheen);
   root.style.setProperty('--text-main', colors.textMain);
   root.style.setProperty('--text-muted', colors.textMuted);
 
@@ -1590,11 +1590,11 @@ function performThemeVariableSwap(themeKey, theme) {
   state.currentTheme = themeKey;
   
   // These variables now control the playback circle too
-  root.style.setProperty('--gold-primary', colors.primaryColor);
-  root.style.setProperty('--gold-bright', colors.primaryBright);
-  root.style.setProperty('--gold-deep', colors.primaryDeep);
-  root.style.setProperty('--gold-glow', colors.primaryGlow);
-  root.style.setProperty('--gold-sheen', colors.primarySheen);
+  root.style.setProperty('--color-primary', colors.primaryColor);
+  root.style.setProperty('--color-bright', colors.primaryBright);
+  root.style.setProperty('--color-deep', colors.primaryDeep);
+  root.style.setProperty('--color-glow', colors.primaryGlow);
+  root.style.setProperty('--color-sheen', colors.primarySheen);
   
   // Update other UI elements
   updateThemeListUI();
@@ -1802,11 +1802,11 @@ function performThemeSwap(themeKey, theme) {
   root.style.setProperty('--titanium-dark', colors.titaniumDark);
   root.style.setProperty('--titanium-light', colors.titaniumLight);
   root.style.setProperty('--titanium-border', colors.titaniumBorder);
-  root.style.setProperty('--gold-primary', colors.primaryColor);
-  root.style.setProperty('--gold-bright', colors.primaryBright);
-  root.style.setProperty('--gold-sheen', colors.primarySheen);
-  root.style.setProperty('--gold-deep', colors.primaryDeep);
-  root.style.setProperty('--gold-glow', colors.primaryGlow);
+  root.style.setProperty('--color-primary', colors.primaryColor);
+  root.style.setProperty('--color-bright', colors.primaryBright);
+  root.style.setProperty('--color-sheen', colors.primarySheen);
+  root.style.setProperty('--color-deep', colors.primaryDeep);
+  root.style.setProperty('--color-glow', colors.primaryGlow);
   root.style.setProperty('--text-main', colors.textMain);
   root.style.setProperty('--text-muted', colors.textMuted);
 
