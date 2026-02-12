@@ -214,24 +214,28 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 18px;
-  width: 18px;
+  height: 16px;
+  width: 16px;
   border-radius: 50%;
-  /* Use theme variables instead of hardcoded hex codes */
+  /* A high-specular radial gradient for a 3D spherical effect */
   background: radial-gradient(
     circle at 30% 30%, 
     var(--color-bright) 0%, 
-    var(--color-primary) 40%, 
+    var(--color-primary) 45%, 
     var(--color-deep) 100%
   );
-  margin-top: -7px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 10px var(--color-glow);
+  margin-top: -6px; /* Centers thumb on the 4px track */
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.5), 
+    0 0 12px var(--color-glow);
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  /* Add transition so it morphs smoothly */
-  transition: transform 0.2s ease, background 0.5s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* Ensures visual changes (like theme swaps) are smooth */
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.5s ease;
 }
-input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.5);
+}
 
 .row {
   display: flex;

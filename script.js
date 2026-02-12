@@ -353,6 +353,8 @@ const state = {
   audioContext: null,
   sourceNode: null,
   rafId: null,
+  progressRafId: null,
+  isSeeking: false,
   currentTheme: 'gothic-gold', // Default theme (matches the original design)
   rainbowInterval: null,
   rainbowIndex: 0
@@ -385,6 +387,7 @@ const themeList = document.getElementById('themeList');
 const themeImportInput = document.getElementById('themeImportInput');
 
 state.isChangingTheme = false
+let progressAnimationId;
 
 /* ------- Utilities ------- */
 function fmtTime(s){
@@ -1009,6 +1012,8 @@ function loadTrack(index, opts={autoplay:false}){
 
   setupAudioContext();
   buildVisualiserBars(state.visualBars);
+
+  syncPlaybackStateFromAudio()
 }
 
 /* ------- Playback controls ------- */
@@ -1034,6 +1039,8 @@ function stopAudio(){
   state.audio.currentTime = 0;
   state.isPlaying = false;
   statusDisplay.textContent = 'Stopped';
+  seekRange.value = 0;
+  syncPlaybackStateFromAudio();
   togglePlayIcon(false);
   if(state.rafId) cancelAnimationFrame(state.rafId);
 }
@@ -1314,9 +1321,13 @@ function syncPlaybackStateFromAudio(){
   if(playing){
     statusDisplay.textContent = 'Playing';
     if(state.analyser) startVisualiser();
+    if (!state.progressRafId) {
+      state.progressRafId = requestAnimationFrame(updateSmoothProgress);
+    }
   } else {
     statusDisplay.textContent = state.audio.ended ? 'Stopped' : 'Paused';
     if(state.rafId) cancelAnimationFrame(state.rafId);
+    if (state.progressRafId) {cancelAnimationFrame(state.progressRafId); state.progressRafId = null}
   }
 }
 
@@ -1817,6 +1828,22 @@ function performThemeSwap(themeKey, theme) {
   updateThemeListUI();
 }
 
+function updateProgress() {
+  if (!state.audio.paused) {
+    const cur = state.audio.currentTime;
+    const dur = state.audio.duration;
+    
+    if (dur) {
+      // Use 1000 to match the new HTML max value for higher precision
+      seekRange.value = (cur / dur) * 100;
+      timeDisplay.textContent = `${fmtTime(cur)} / ${fmtTime(dur)}`;
+    }
+    
+    // Continue the loop
+    progressAnimationId = requestAnimationFrame(updateProgress);
+  }
+}
+
 // Theme button event listener
 themeBtn.addEventListener('click', toggleThemePanel);
 
@@ -1845,3 +1872,19 @@ document.addEventListener('DOMContentLoaded', () => {
   applyTheme(savedTheme, false);
   renderThemeList();
 });
+
+state.audio.addEventListener('play', () => {
+  progressAnimationId = requestAnimationFrame(updateProgress);
+});
+
+// Stop the loop when paused to save resources
+state.audio.addEventListener('pause', () => {
+  cancelAnimationFrame(progressAnimationId);
+});
+
+function update() {
+  startVisualiser()
+  requestAnimationFrame(update);
+}
+
+requestAnimationFrame(update);
