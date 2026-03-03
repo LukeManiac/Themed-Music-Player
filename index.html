@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -9,17 +9,36 @@
 </head>
 <body>
   <!-- Theme Button (Top Right) -->
-  <button class="theme-toggle-btn" id="themeBtn" title="Themes">
+  <button class="theme-toggle-btn" id="themeBtn" data-i18n-title="themesTitle">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="3"></circle>
       <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m0-6l4.2-4.2"></path>
     </svg>
   </button>
 
+  <!-- Language Button (Below Theme Button) -->
+  <button class="theme-toggle-btn lang-toggle-btn" id="langBtn" title="Language">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="2" y1="12" x2="22" y2="12"></line>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </button>
+
+  <!-- Language Panel -->
+  <div class="theme-panel lang-panel" id="langPanel">
+    <div class="theme-panel-header">
+      <h3 id="langPanelTitle">Language</h3>
+    </div>
+    <div class="theme-list" id="langList">
+      <!-- Languages populated by JavaScript -->
+    </div>
+  </div>
+
   <!-- Theme Panel -->
   <div class="theme-panel" id="themePanel">
     <div class="theme-panel-header">
-      <h3>Themes</h3>
+      <h3 data-i18n="themes">Themes</h3>
     </div>
     <div class="theme-list" id="themeList">
       <!-- Themes will be populated by JavaScript -->
@@ -28,8 +47,9 @@
 
   <!-- Hidden file input for theme import -->
   <input type="file" id="themeImportInput" accept=".json" style="display: none;" />
+  <input type="file" id="langImportInput" accept=".json" style="display: none;" />
 
-  <div class="player" role="application" aria-label="Golden Titanium Music Player">
+  <div class="player" role="application" data-i18n-aria-label="playerLabel">
     
     <div class="panel" id="leftPanel">
       <div class="liquid-blob" id="liquidBlob" aria-hidden="true"></div>
@@ -45,48 +65,48 @@
         </div>
 
         <div class="track-info" aria-live="polite">
-          <div class="title" id="title">No Track Loaded</div>
-          <div class="artist" id="artist">Drag & Drop Audio File</div>
+          <div class="title" id="title" data-i18n="noTrackLoaded">No Track Loaded</div>
+          <div class="artist" id="artist" data-i18n="dragDrop">Drag &amp; Drop Audio File</div>
         </div>
       </div>
 
       <div class="visualiser" id="visualiser" aria-hidden="true">
         </div>
 
-      <div class="seek" aria-label="Seek Track">
+      <div class="seek" data-i18n-aria-label="seekLabel">
         <input id="seekRange" type="range" min="0" max="100" value="0" step="any"/>
       </div>
 
       <div class="row" style="margin-top:12px">
         <div class="footer-note" id="timeDisplay">00:00 / 00:00</div>
-        <div class="footer-note" id="statusDisplay">Idle</div>
+        <div class="footer-note" id="statusDisplay" data-i18n="idle">Idle</div>
       </div>
     </div>
 
     <div class="controls" id="rightControls">
       
       <div class="transport">
-        <div class="buttons" role="group" aria-label="Playback controls">
-          <button class="btn" id="rewBtn" title="Rewind 5s (Shift+Click for 10s, Ctrl+Click for previous track)">
+        <div class="buttons" role="group" data-i18n-aria-label="playbackControls">
+          <button class="btn" id="rewBtn" data-i18n-title="rewindTitle">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="11 19 2 12 11 5 11 19"></polygon>
               <polygon points="22 19 13 12 22 5 22 19"></polygon>
             </svg>
           </button>
 
-          <button class="btn" id="stopBtn" title="Stop">
+          <button class="btn" id="stopBtn" data-i18n-title="stopTitle">
             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
               <rect x="6" y="6" width="12" height="12" rx="2" />
             </svg>
           </button>
 
-          <button class="btn play" id="playBtn" title="Play">
+          <button class="btn play" id="playBtn" data-i18n-title="playTitle">
             <svg id="playIcon" class="icon" viewBox="0 0 24 24" fill="currentColor">
               <path id="playPath" d="M5 3.86603C5 2.71133 6.25 1.98968 7.25 2.56667L21.25 10.644C22.25 11.221 22.25 12.6643 21.25 13.2413L7.25 21.3187C6.25 21.8957 5 21.174 5 20.0193V3.86603Z"/>
             </svg>
           </button>
 
-          <button class="btn" id="fwdBtn" title="Forward 5s (Shift+Click for 10s, Ctrl+Click for next track)">
+          <button class="btn" id="fwdBtn" data-i18n-title="forwardTitle">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="13 19 22 12 13 5 13 19"></polygon>
               <polygon points="2 19 11 12 2 5 2 19"></polygon>
@@ -96,7 +116,7 @@
       </div>
 
       <div class="extra">
-        <button class="btn toggle" id="shuffleBtn" title="Shuffle: Off">
+        <button class="btn toggle" id="shuffleBtn" data-i18n-title="shuffleOff">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="16 3 21 3 21 8"></polyline>
             <line x1="4" y1="20" x2="21" y2="3"></line>
@@ -106,7 +126,7 @@
           </svg>
         </button>
         
-        <button class="btn toggle" id="repeatBtn" title="Repeat: Off">
+        <button class="btn toggle" id="repeatBtn" data-i18n-title="repeatOff">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="17 1 21 5 17 9"></polyline>
             <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
@@ -118,17 +138,17 @@
       </div>
 
       <div class="row">
-        <label for="fileInput" class="upload-btn" title="Upload local audio" role="button" tabindex="0">
+        <label for="fileInput" class="upload-btn" data-i18n-title="uploadTitle" role="button" tabindex="0" data-i18n="uploadAudio">
           Upload Audio
         </label>
         <input id="fileInput" type="file" accept="audio/*" multiple style="display:none" />
       </div>
 
-      <div class="playlist" id="playlist" aria-label="Playlist">
+      <div class="playlist" id="playlist" data-i18n-aria-label="playlistLabel">
         </div>
       
       <div style="margin-top:auto; display:flex; justify-content:center;">
-         <div class="footer-note">Designed in California</div>
+         <div class="footer-note" data-i18n="designedIn">Designed in California</div>
       </div>
     </div>
   </div>

@@ -1,3 +1,942 @@
+/* ------- Internationalisation ------- */
+const I18N = {
+  en: {
+    noTrackLoaded: 'No Track Loaded',
+    dragDrop: 'Drag & Drop Audio File',
+    idle: 'Idle',
+    playing: 'Playing',
+    paused: 'Paused',
+    stopped: 'Stopped',
+    loaded: 'Loaded',
+    noSongLoaded: 'No song loaded',
+    dropAudioFile: 'Drop an audio file',
+    playBlocked: 'Play blocked (interaction required)',
+    shuffleOn: 'Shuffle: On',
+    shuffleOff: 'Shuffle: Off',
+    repeatOff: 'Repeat: Off',
+    repeatAll: 'Repeat: All',
+    repeatOne: 'Repeat: One',
+    themes: 'Themes',
+    importTheme: 'Import Theme',
+    invalidThemeFile: 'Invalid theme file format',
+    errorParsingTheme: 'Error parsing theme file: ',
+    importLanguage: 'Import Language',
+    invalidLangFile: 'Invalid language file format',
+    errorParsingLang: 'Error parsing language file: ',
+    uploadAudio: 'Upload Audio',
+    designedIn: 'Designed in California',
+    playerLabel: 'Themed Music Player',
+    seekLabel: 'Seek Track',
+    playbackControls: 'Playback controls',
+    playlistLabel: 'Playlist',
+    rewindTitle: 'Rewind 5s (Shift+Click for 10s, Ctrl+Click for previous track)',
+    stopTitle: 'Stop',
+    playTitle: 'Play',
+    forwardTitle: 'Forward 5s (Shift+Click for 10s, Ctrl+Click for next track)',
+    themesTitle: 'Themes',
+    uploadTitle: 'Upload local audio',
+    clearCacheTitle: 'Are you sure you want to clear all cache from this website? This will remove all your custom languages and themes. I suggest saving them before clearing your cache.',
+    clearCacheYes: 'Yes',
+    clearCacheNo: 'No',
+    customLanguages: "Custom Languages",
+    themeNames: {
+      'basic-titanium':  'Natural Titanium',
+      'gothic-gold':     'Gothic Gold',
+      'brilliant-bronze':'Brilliant Bronze',
+      'desert-titanium': 'Desert Titanium',
+      'midnight-nebula': 'Midnight Nebula',
+      'emerald-isle':    'Emerald Isle',
+      'cyber-pulse':     'Cyber Pulse',
+      'frozen-glacier':  'Frozen Glacier',
+      'crimson-stealth': 'Crimson Stealth',
+      'rolex-everose':   'Rolex Everose',
+      'obsidian-black':  'Obsidian Black',
+      'solar-flare':     'Solar Flare',
+      'rainbow-pulse':   'Rainbow Pulse',
+    },
+    languageNames: {
+      'en-GB': 'English (UK)',
+      'en-US': 'English (US)',
+      'en-AU': 'English (Australia)',
+      'en-CA': 'English (Canada)',
+      'fr-FR': 'French (France)',
+      'fr-CA': 'French (Canada)',
+      'fr-BE': 'French (Belgium)',
+      'fr-CH': 'French (Switzerland)',
+      'es-ES': 'Spanish (Spain)',
+      'es-MX': 'Spanish (Mexico)',
+      'es-AR': 'Spanish (Argentina)',
+      'es-CO': 'Spanish (Colombia)',
+      'pt-BR': 'Portuguese (Brazil)',
+      'pt-PT': 'Portuguese (Portugal)',
+      'zh-CN': 'Chinese (Simplified)',
+      'zh-TW': 'Chinese (Traditional)',
+      'zh-HK': 'Chinese (Hong Kong)',
+      'ar-SA': 'Arabic (Saudi Arabia)',
+      'ar-EG': 'Arabic (Egypt)',
+      'ar-MA': 'Arabic (Morocco)',
+      'de-DE': 'German (Germany)',
+      'de-AT': 'German (Austria)',
+      'de-CH': 'German (Switzerland)',
+      'ja': 'Japanese',
+      'ko': 'Korean',
+      'ru': 'Russian',
+    },
+  },
+  ar: {
+    noTrackLoaded: 'لا يوجد مقطع صوتي',
+    dragDrop: 'اسحب وأفلت ملف صوتي',
+    idle: 'في انتظار',
+    playing: 'يُشغَّل',
+    paused: 'متوقف مؤقتاً',
+    stopped: 'موقوف',
+    loaded: 'تم التحميل',
+    noSongLoaded: 'لا يوجد مقطع محمّل',
+    dropAudioFile: 'أفلت ملفاً صوتياً',
+    playBlocked: 'التشغيل محظور (يلزم تفاعل)',
+    shuffleOn: 'عشوائي: تشغيل',
+    shuffleOff: 'عشوائي: إيقاف',
+    repeatOff: 'تكرار: إيقاف',
+    repeatAll: 'تكرار: الكل',
+    repeatOne: 'تكرار: واحد',
+    themes: 'السمات',
+    importTheme: 'استيراد سمة',
+    invalidThemeFile: 'تنسيق ملف السمة غير صالح',
+    errorParsingTheme: 'خطأ في تحليل ملف السمة: ',
+    importLanguage: 'استيراد لغة',
+    invalidLangFile: 'تنسيق ملف اللغة غير صالح',
+    errorParsingLang: 'خطأ في تحليل ملف اللغة: ',
+    uploadAudio: 'رفع صوت',
+    designedIn: 'صُمِّم في كاليفورنيا',
+    playerLabel: 'مشغّل موسيقى',
+    seekLabel: 'تقديم/تأخير المقطع',
+    playbackControls: 'أدوات التشغيل',
+    playlistLabel: 'قائمة التشغيل',
+    rewindTitle: 'تراجع 5 ث (Shift+نقر لـ 10 ث، Ctrl+نقر للمقطع السابق)',
+    stopTitle: 'إيقاف',
+    playTitle: 'تشغيل',
+    forwardTitle: 'تقديم 5 ث (Shift+نقر لـ 10 ث، Ctrl+نقر للمقطع التالي)',
+    themesTitle: 'السمات',
+    uploadTitle: 'رفع ملف صوتي محلي',
+    clearCacheTitle: 'هل أنت متأكد أنك تريد مسح كل ذاكرة التخزين المؤقت من هذا الموقع؟ سيؤدي ذلك إلى إزالة جميع لغاتك وسماتك المخصصة. أنصحك بحفظها قبل المسح.',
+    clearCacheYes: 'نعم',
+    clearCacheNo: 'لا',
+    customLanguages: "اللغات المخصصة",
+    themeNames: {
+      'basic-titanium':  'تيتانيوم طبيعي',
+      'gothic-gold':     'ذهب قوطي',
+      'brilliant-bronze':'برونز لامع',
+      'desert-titanium': 'تيتانيوم صحراوي',
+      'midnight-nebula': 'سديم منتصف الليل',
+      'emerald-isle':    'جزيرة زمردية',
+      'cyber-pulse':     'نبضة إلكترونية',
+      'frozen-glacier':  'جليد متجمد',
+      'crimson-stealth': 'أحمر قرمزي خفي',
+      'rolex-everose':   'رولكس إيفر روز',
+      'obsidian-black':  'أسود أوبسيديان',
+      'solar-flare':     'وميض شمسي',
+      'rainbow-pulse':   'نبضة قوس قزح',
+    },
+    languageNames: {
+      'en-GB': 'الإنجليزية (المملكة المتحدة)',
+      'en-US': 'الإنجليزية (الولايات المتحدة)',
+      'en-AU': 'الإنجليزية (أستراليا)',
+      'en-CA': 'الإنجليزية (كندا)',
+      'fr-FR': 'الفرنسية (فرنسا)',
+      'fr-CA': 'الفرنسية (كندا)',
+      'fr-BE': 'الفرنسية (بلجيكا)',
+      'fr-CH': 'الفرنسية (سويسرا)',
+      'es-ES': 'الإسبانية (إسبانيا)',
+      'es-MX': 'الإسبانية (المكسيك)',
+      'es-AR': 'الإسبانية (الأرجنتين)',
+      'es-CO': 'الإسبانية (كولومبيا)',
+      'pt-BR': 'البرتغالية (البرازيل)',
+      'pt-PT': 'البرتغالية (البرتغال)',
+      'zh-CN': 'الصينية (المبسطة)',
+      'zh-TW': 'الصينية (التقليدية)',
+      'zh-HK': 'الصينية (هونغ كونغ)',
+      'ar-SA': 'العربية (السعودية)',
+      'ar-EG': 'العربية (مصر)',
+      'ar-MA': 'العربية (المغرب)',
+      'de-DE': 'الألمانية (ألمانيا)',
+      'de-AT': 'الألمانية (النمسا)',
+      'de-CH': 'الألمانية (سويسرا)',
+      'ja': 'اليابانية',
+      'ko': 'الكورية',
+      'ru': 'الروسية',
+    },
+  },
+  fr: {
+    noTrackLoaded: 'Aucune piste chargée',
+    dragDrop: 'Glisser-déposer un fichier audio',
+    idle: 'En attente',
+    playing: 'Lecture',
+    paused: 'En pause',
+    stopped: 'Arrêté',
+    loaded: 'Chargé',
+    noSongLoaded: 'Aucune chanson chargée',
+    dropAudioFile: 'Déposez un fichier audio',
+    playBlocked: 'Lecture bloquée (interaction requise)',
+    shuffleOn: 'Aléatoire : activé',
+    shuffleOff: 'Aléatoire : désactivé',
+    repeatOff: 'Répéter : désactivé',
+    repeatAll: 'Répéter : tout',
+    repeatOne: 'Répéter : un',
+    themes: 'Thèmes',
+    importTheme: 'Importer un thème',
+    invalidThemeFile: 'Format de fichier de thème invalide',
+    errorParsingTheme: 'Erreur d\'analyse du fichier de thème : ',
+    importLanguage: 'Importer une langue',
+    invalidLangFile: 'Format de fichier de langue invalide',
+    errorParsingLang: 'Erreur d\'analyse du fichier de langue : ',
+    uploadAudio: 'Importer audio',
+    designedIn: 'Conçu en Californie',
+    playerLabel: 'Lecteur musical',
+    seekLabel: 'Avancer/reculer',
+    playbackControls: 'Contrôles de lecture',
+    playlistLabel: 'Liste de lecture',
+    rewindTitle: 'Reculer 5s (Maj+Clic pour 10s, Ctrl+Clic pour piste précédente)',
+    stopTitle: 'Arrêter',
+    playTitle: 'Lire',
+    forwardTitle: 'Avancer 5s (Maj+Clic pour 10s, Ctrl+Clic pour piste suivante)',
+    themesTitle: 'Thèmes',
+    uploadTitle: 'Importer un fichier audio local',
+    clearCacheTitle: 'Êtes-vous sûr de vouloir effacer tout le cache de ce site ? Cela supprimera toutes vos langues et thèmes personnalisés. Je vous conseille de les sauvegarder avant.',
+    clearCacheYes: 'Oui',
+    clearCacheNo: 'Non',
+    customLanguages: "Langues personnalisées",
+    themeNames: {
+      'basic-titanium':  'Titane naturel',
+      'gothic-gold':     'Or gothique',
+      'brilliant-bronze':'Bronze brillant',
+      'desert-titanium': 'Titane désert',
+      'midnight-nebula': 'Nébuleuse de minuit',
+      'emerald-isle':    "Île d'émeraude",
+      'cyber-pulse':     'Pulsation cyber',
+      'frozen-glacier':  'Glacier gelé',
+      'crimson-stealth': 'Furtif cramoisi',
+      'rolex-everose':   'Rolex Everose',
+      'obsidian-black':  'Noir obsidienne',
+      'solar-flare':     'Éruption solaire',
+      'rainbow-pulse':   'Pulsation arc-en-ciel',
+    },
+    languageNames: {
+      'en-GB': 'Anglais (Royaume-Uni)',
+      'en-US': 'Anglais (États-Unis)',
+      'en-AU': 'Anglais (Australie)',
+      'en-CA': 'Anglais (Canada)',
+      'fr-FR': 'Français (France)',
+      'fr-CA': 'Français (Canada)',
+      'fr-BE': 'Français (Belgique)',
+      'fr-CH': 'Français (Suisse)',
+      'es-ES': 'Espagnol (Espagne)',
+      'es-MX': 'Espagnol (Mexique)',
+      'es-AR': 'Espagnol (Argentine)',
+      'es-CO': 'Espagnol (Colombie)',
+      'pt-BR': 'Portugais (Brésil)',
+      'pt-PT': 'Portugais (Portugal)',
+      'zh-CN': 'Chinois (simplifié)',
+      'zh-TW': 'Chinois (traditionnel)',
+      'zh-HK': 'Chinois (Hong Kong)',
+      'ar-SA': 'Arabe (Arabie Saoudite)',
+      'ar-EG': 'Arabe (Égypte)',
+      'ar-MA': 'Arabe (Maroc)',
+      'de-DE': 'Allemand (Allemagne)',
+      'de-AT': 'Allemand (Autriche)',
+      'de-CH': 'Allemand (Suisse)',
+      'ja': 'Japonais',
+      'ko': 'Coréen',
+      'ru': 'Russe',
+    },
+  },
+  de: {
+    noTrackLoaded: 'Kein Titel geladen',
+    dragDrop: 'Audiodatei hierher ziehen',
+    idle: 'Bereit',
+    playing: 'Wiedergabe',
+    paused: 'Pausiert',
+    stopped: 'Gestoppt',
+    loaded: 'Geladen',
+    noSongLoaded: 'Kein Lied geladen',
+    dropAudioFile: 'Audiodatei ablegen',
+    playBlocked: 'Wiedergabe blockiert (Interaktion erforderlich)',
+    shuffleOn: 'Zufallswiedergabe: Ein',
+    shuffleOff: 'Zufallswiedergabe: Aus',
+    repeatOff: 'Wiederholen: Aus',
+    repeatAll: 'Wiederholen: Alle',
+    repeatOne: 'Wiederholen: Eins',
+    themes: 'Themen',
+    importTheme: 'Thema importieren',
+    invalidThemeFile: 'Ungültiges Thema-Dateiformat',
+    errorParsingTheme: 'Fehler beim Lesen der Thema-Datei: ',
+    importLanguage: 'Sprache importieren',
+    invalidLangFile: 'Ungültiges Sprach-Dateiformat',
+    errorParsingLang: 'Fehler beim Lesen der Sprach-Datei: ',
+    uploadAudio: 'Audio hochladen',
+    designedIn: 'Entworfen in Kalifornien',
+    playerLabel: 'Musik-Player',
+    seekLabel: 'Titel suchen',
+    playbackControls: 'Wiedergabesteuerung',
+    playlistLabel: 'Wiedergabeliste',
+    rewindTitle: '5s zurückspulen (Umschalt+Klick für 10s, Strg+Klick für vorherigen Titel)',
+    stopTitle: 'Stopp',
+    playTitle: 'Abspielen',
+    forwardTitle: '5s vorspulen (Umschalt+Klick für 10s, Strg+Klick für nächsten Titel)',
+    themesTitle: 'Themen',
+    uploadTitle: 'Lokale Audiodatei hochladen',
+    clearCacheTitle: 'Möchten Sie wirklich den gesamten Cache dieser Website löschen? Dadurch werden alle Ihre benutzerdefinierten Sprachen und Themen entfernt. Ich empfehle, diese vorher zu speichern.',
+    clearCacheYes: 'Ja',
+    clearCacheNo: 'Nein',
+    customLanguages: "Benutzerdefinierte Sprachen",
+    themeNames: {
+      'basic-titanium':  'Natürliches Titan',
+      'gothic-gold':     'Gotisches Gold',
+      'brilliant-bronze':'Brillantes Bronze',
+      'desert-titanium': 'Wüsten-Titan',
+      'midnight-nebula': 'Mitternachtsnebel',
+      'emerald-isle':    'Smaragdinsel',
+      'cyber-pulse':     'Cyber-Puls',
+      'frozen-glacier':  'Gefrorener Gletscher',
+      'crimson-stealth': 'Karmesin-Tarnung',
+      'rolex-everose':   'Rolex Everose',
+      'obsidian-black':  'Obsidian-Schwarz',
+      'solar-flare':     'Sonneneruption',
+      'rainbow-pulse':   'Regenbogen-Puls',
+    },
+    languageNames: {
+      'en-GB': 'Englisch (UK)',
+      'en-US': 'Englisch (USA)',
+      'en-AU': 'Englisch (Australien)',
+      'en-CA': 'Englisch (Kanada)',
+      'fr-FR': 'Französisch (Frankreich)',
+      'fr-CA': 'Französisch (Kanada)',
+      'fr-BE': 'Französisch (Belgien)',
+      'fr-CH': 'Französisch (Schweiz)',
+      'es-ES': 'Spanisch (Spanien)',
+      'es-MX': 'Spanisch (Mexiko)',
+      'es-AR': 'Spanisch (Argentinien)',
+      'es-CO': 'Spanisch (Kolumbien)',
+      'pt-BR': 'Portugiesisch (Brasilien)',
+      'pt-PT': 'Portugiesisch (Portugal)',
+      'zh-CN': 'Chinesisch (Vereinfacht)',
+      'zh-TW': 'Chinesisch (Traditionell)',
+      'zh-HK': 'Chinesisch (Hongkong)',
+      'ar-SA': 'Arabisch (Saudi-Arabien)',
+      'ar-EG': 'Arabisch (Ägypten)',
+      'ar-MA': 'Arabisch (Marokko)',
+      'de-DE': 'Deutsch (Deutschland)',
+      'de-AT': 'Deutsch (Österreich)',
+      'de-CH': 'Deutsch (Schweiz)',
+      'ja': 'Japanisch',
+      'ko': 'Koreanisch',
+      'ru': 'Russisch',
+    },
+  },
+  es: {
+    noTrackLoaded: 'Sin pista cargada',
+    dragDrop: 'Arrastra un archivo de audio',
+    idle: 'En espera',
+    playing: 'Reproduciendo',
+    paused: 'En pausa',
+    stopped: 'Detenido',
+    loaded: 'Cargado',
+    noSongLoaded: 'No hay canción cargada',
+    dropAudioFile: 'Suelta un archivo de audio',
+    playBlocked: 'Reproducción bloqueada (interacción requerida)',
+    shuffleOn: 'Aleatório: activado',
+    shuffleOff: 'Aleatório: desactivado',
+    repeatOff: 'Repetir: desactivado',
+    repeatAll: 'Repetir: todo',
+    repeatOne: 'Repetir: uno',
+    themes: 'Temas',
+    importTheme: 'Importar tema',
+    invalidThemeFile: 'Formato de archivo de tema inválido',
+    errorParsingTheme: 'Error al leer el archivo de tema: ',
+    importLanguage: 'Importar idioma',
+    invalidLangFile: 'Formato de archivo de idioma inválido',
+    errorParsingLang: 'Error al leer el archivo de idioma: ',
+    uploadAudio: 'Subir audio',
+    designedIn: 'Diseñado en California',
+    playerLabel: 'Reproductor de música',
+    seekLabel: 'Buscar en la pista',
+    playbackControls: 'Controles de reproducción',
+    playlistLabel: 'Lista de reproducción',
+    rewindTitle: 'Rebobinar 5s (Shift+Clic para 10s, Ctrl+Clic para pista anterior)',
+    stopTitle: 'Detener',
+    playTitle: 'Reproducir',
+    forwardTitle: 'Avanzar 5s (Shift+Clic para 10s, Ctrl+Clic para siguiente pista)',
+    themesTitle: 'Temas',
+    uploadTitle: 'Subir archivo de audio local',
+    clearCacheTitle: '¿Estás seguro de que deseas borrar toda la caché de este sitio web? Esto eliminará todos tus idiomas y temas personalizados. Te sugiero guardarlos antes de borrar.',
+    clearCacheYes: 'Sí',
+    clearCacheNo: 'No',
+    customLanguages: "Idiomas personalizados",
+    themeNames: {
+      'basic-titanium':  'Titanio natural',
+      'gothic-gold':     'Oro gótico',
+      'brilliant-bronze':'Bronce brillante',
+      'desert-titanium': 'Titanio desierto',
+      'midnight-nebula': 'Nebulosa de medianoche',
+      'emerald-isle':    'Isla esmeralda',
+      'cyber-pulse':     'Pulso cibernético',
+      'frozen-glacier':  'Glaciar congelado',
+      'crimson-stealth': 'Sigilo carmesí',
+      'rolex-everose':   'Rolex Everose',
+      'obsidian-black':  'Negro obsidiana',
+      'solar-flare':     'Llamarada solar',
+      'rainbow-pulse':   'Pulso arcoíris',
+    },
+    languageNames: {
+      'en-GB': 'Inglés (Reino Unido)',
+      'en-US': 'Inglés (EE. UU.)',
+      'en-AU': 'Inglés (Australia)',
+      'en-CA': 'Inglés (Canadá)',
+      'fr-FR': 'Francés (Francia)',
+      'fr-CA': 'Francés (Canadá)',
+      'fr-BE': 'Francés (Bélgica)',
+      'fr-CH': 'Francés (Suiza)',
+      'es-ES': 'Español (España)',
+      'es-MX': 'Español (México)',
+      'es-AR': 'Español (Argentina)',
+      'es-CO': 'Español (Colombia)',
+      'pt-BR': 'Portugués (Brasil)',
+      'pt-PT': 'Portugués (Portugal)',
+      'zh-CN': 'Chino (simplificado)',
+      'zh-TW': 'Chino (tradicional)',
+      'zh-HK': 'Chino (Hong Kong)',
+      'ar-SA': 'Árabe (Arabia Saudita)',
+      'ar-EG': 'Árabe (Egipto)',
+      'ar-MA': 'Árabe (Marruecos)',
+      'de-DE': 'Alemán (Alemania)',
+      'de-AT': 'Alemán (Austria)',
+      'de-CH': 'Alemán (Suiza)',
+      'ja': 'Japonés',
+      'ko': 'Coreano',
+      'ru': 'Ruso',
+    },
+  },
+  zh: {
+    noTrackLoaded: '未加载曲目',
+    dragDrop: '拖放音频文件',
+    idle: '待机',
+    playing: '播放中',
+    paused: '已暂停',
+    stopped: '已停止',
+    loaded: '已加载',
+    noSongLoaded: '未加载歌曲',
+    dropAudioFile: '放入音频文件',
+    playBlocked: '播放受阻（需要交互）',
+    shuffleOn: '随机播放：开启',
+    shuffleOff: '随机播放：关闭',
+    repeatOff: '重复：关闭',
+    repeatAll: '重复：全部',
+    repeatOne: '重复：单曲',
+    themes: '主题',
+    importTheme: '导入主题',
+    invalidThemeFile: '主题文件格式无效',
+    errorParsingTheme: '解析主题文件出错：',
+    importLanguage: '导入语言',
+    invalidLangFile: '语言文件格式无效',
+    errorParsingLang: '解析语言文件出错：',
+    uploadAudio: '上传音频',
+    designedIn: '设计于加利福尼亚',
+    playerLabel: '音乐播放器',
+    seekLabel: '进度调节',
+    playbackControls: '播放控制',
+    playlistLabel: '播放列表',
+    rewindTitle: '后退5秒（Shift+点击后退10秒，Ctrl+点击上一曲）',
+    stopTitle: '停止',
+    playTitle: '播放',
+    forwardTitle: '前进5秒（Shift+点击前进10秒，Ctrl+点击下一曲）',
+    themesTitle: '主题',
+    uploadTitle: '上传本地音频文件',
+    clearCacheTitle: '您确定要清除此网站的所有缓存吗？这将删除您所有的自定义语言和主题。建议您在清除之前先保存它们。',
+    clearCacheYes: '是',
+    clearCacheNo: '否',
+    customLanguages: "自定义语言",
+    themeNames: {
+      'basic-titanium':  '自然钛',
+      'gothic-gold':     '哥特金',
+      'brilliant-bronze':'璀璨青铜',
+      'desert-titanium': '沙漠钛',
+      'midnight-nebula': '午夜星云',
+      'emerald-isle':    '翡翠岛',
+      'cyber-pulse':     '赛博脉冲',
+      'frozen-glacier':  '冰封冰川',
+      'crimson-stealth': '深红隐匿',
+      'rolex-everose':   '劳力士永恒玫瑰金',
+      'obsidian-black':  '黑曜石黑',
+      'solar-flare':     '太阳耀斑',
+      'rainbow-pulse':   '彩虹脉冲',
+    },
+    languageNames: {
+      'en-GB': '英语（英国）',
+      'en-US': '英语（美国）',
+      'en-AU': '英语（澳大利亚）',
+      'en-CA': '英语（加拿大）',
+      'fr-FR': '法语（法国）',
+      'fr-CA': '法语（加拿大）',
+      'fr-BE': '法语（比利时）',
+      'fr-CH': '法语（瑞士）',
+      'es-ES': '西班牙语（西班牙）',
+      'es-MX': '西班牙语（墨西哥）',
+      'es-AR': '西班牙语（阿根廷）',
+      'es-CO': '西班牙语（哥伦比亚）',
+      'pt-BR': '葡萄牙语（巴西）',
+      'pt-PT': '葡萄牙语（葡萄牙）',
+      'zh-CN': '中文（简体）',
+      'zh-TW': '中文（繁体）',
+      'zh-HK': '中文（香港）',
+      'ar-SA': '阿拉伯语（沙特阿拉伯）',
+      'ar-EG': '阿拉伯语（埃及）',
+      'ar-MA': '阿拉伯语（摩洛哥）',
+      'de-DE': '德语（德国）',
+      'de-AT': '德语（奥地利）',
+      'de-CH': '德语（瑞士）',
+      'ja': '日语',
+      'ko': '韩语',
+      'ru': '俄语',
+    },
+  },
+  ja: {
+    noTrackLoaded: 'トラック未読み込み',
+    dragDrop: '音声ファイルをドラッグ＆ドロップ',
+    idle: '待機中',
+    playing: '再生中',
+    paused: '一時停止',
+    stopped: '停止',
+    loaded: '読み込み完了',
+    noSongLoaded: '曲が読み込まれていません',
+    dropAudioFile: '音声ファイルをドロップ',
+    playBlocked: '再生がブロックされました（操作が必要です）',
+    shuffleOn: 'シャッフル：オン',
+    shuffleOff: 'シャッフル：オフ',
+    repeatOff: 'リピート：オフ',
+    repeatAll: 'リピート：全曲',
+    repeatOne: 'リピート：1曲',
+    themes: 'テーマ',
+    importTheme: 'テーマをインポート',
+    invalidThemeFile: '無効なテーマファイル形式',
+    errorParsingTheme: 'テーマファイルの解析エラー：',
+    importLanguage: '言語をインポート',
+    invalidLangFile: '無効な言語ファイル形式',
+    errorParsingLang: '言語ファイルの解析エラー：',
+    uploadAudio: '音声をアップロード',
+    designedIn: 'カリフォルニアでデザイン',
+    playerLabel: '音楽プレーヤー',
+    seekLabel: 'シーク',
+    playbackControls: '再生コントロール',
+    playlistLabel: 'プレイリスト',
+    rewindTitle: '5秒戻す（Shift+クリックで10秒、Ctrl+クリックで前のトラック）',
+    stopTitle: '停止',
+    playTitle: '再生',
+    forwardTitle: '5秒進む（Shift+クリックで10秒、Ctrl+クリックで次のトラック）',
+    themesTitle: 'テーマ',
+    uploadTitle: 'ローカル音声ファイルをアップロード',
+    clearCacheTitle: 'このウェブサイトのキャッシュをすべてクリアしてもよろしいですか？カスタム言語とテーマがすべて削除されます。クリア前に保存することをお勧めします。',
+    clearCacheYes: 'はい',
+    clearCacheNo: 'いいえ',
+    customLanguages: "カスタム言語",
+    themeNames: {
+      'basic-titanium':  'ナチュラルチタン',
+      'gothic-gold':     'ゴシックゴールド',
+      'brilliant-bronze':'ブリリアントブロンズ',
+      'desert-titanium': 'デザートチタン',
+      'midnight-nebula': 'ミッドナイトネビュラ',
+      'emerald-isle':    'エメラルドアイル',
+      'cyber-pulse':     'サイバーパルス',
+      'frozen-glacier':  'フローズングレイシャー',
+      'crimson-stealth': 'クリムゾンステルス',
+      'rolex-everose':   'ロレックス エバーローズ',
+      'obsidian-black':  'オブシディアンブラック',
+      'solar-flare':     'ソーラーフレア',
+      'rainbow-pulse':   'レインボーパルス',
+    },
+    languageNames: {
+      'en-GB': '英語（英国）',
+      'en-US': '英語（米国）',
+      'en-AU': '英語（オーストラリア）',
+      'en-CA': '英語（カナダ）',
+      'fr-FR': 'フランス語（フランス）',
+      'fr-CA': 'フランス語（カナダ）',
+      'fr-BE': 'フランス語（ベルギー）',
+      'fr-CH': 'フランス語（スイス）',
+      'es-ES': 'スペイン語（スペイン）',
+      'es-MX': 'スペイン語（メキシコ）',
+      'es-AR': 'スペイン語（アルゼンチン）',
+      'es-CO': 'スペイン語（コロンビア）',
+      'pt-BR': 'ポルトガル語（ブラジル）',
+      'pt-PT': 'ポルトガル語（ポルトガル）',
+      'zh-CN': '中国語（簡体字）',
+      'zh-TW': '中国語（繁体字）',
+      'zh-HK': '中国語（香港）',
+      'ar-SA': 'アラビア語（サウジアラビア）',
+      'ar-EG': 'アラビア語（エジプト）',
+      'ar-MA': 'アラビア語（モロッコ）',
+      'de-DE': 'ドイツ語（ドイツ）',
+      'de-AT': 'ドイツ語（オーストリア）',
+      'de-CH': 'ドイツ語（スイス）',
+      'ja': '日本語',
+      'ko': '韓国語',
+      'ru': 'ロシア語',
+    },
+  },
+  pt: {
+    noTrackLoaded: 'Nenhuma faixa carregada',
+    dragDrop: 'Arraste e solte um arquivo de áudio',
+    idle: 'Inativo',
+    playing: 'Reproduzindo',
+    paused: 'Pausado',
+    stopped: 'Parado',
+    loaded: 'Carregado',
+    noSongLoaded: 'Nenhuma música carregada',
+    dropAudioFile: 'Solte um arquivo de áudio',
+    playBlocked: 'Reprodução bloqueada (interação necessária)',
+    shuffleOn: 'Aleatório: ativado',
+    shuffleOff: 'Aleatório: desativado',
+    repeatOff: 'Repetir: desativado',
+    repeatAll: 'Repetir: tudo',
+    repeatOne: 'Repetir: um',
+    themes: 'Temas',
+    importTheme: 'Importar tema',
+    invalidThemeFile: 'Formato de arquivo de tema inválido',
+    errorParsingTheme: 'Erro ao analisar arquivo de tema: ',
+    importLanguage: 'Importar idioma',
+    invalidLangFile: 'Formato de arquivo de idioma inválido',
+    errorParsingLang: 'Erro ao analisar arquivo de idioma: ',
+    uploadAudio: 'Carregar áudio',
+    designedIn: 'Projetado na Califórnia',
+    playerLabel: 'Reprodutor de música',
+    seekLabel: 'Buscar faixa',
+    playbackControls: 'Controles de reprodução',
+    playlistLabel: 'Lista de reprodução',
+    rewindTitle: 'Voltar 5s (Shift+Clique para 10s, Ctrl+Clique para faixa anterior)',
+    stopTitle: 'Parar',
+    playTitle: 'Reproduzir',
+    forwardTitle: 'Avançar 5s (Shift+Clique para 10s, Ctrl+Clique para próxima faixa)',
+    themesTitle: 'Temas',
+    uploadTitle: 'Carregar arquivo de áudio local',
+    clearCacheTitle: 'Tem certeza de que deseja limpar todo o cache deste site? Isso removerá todos os seus idiomas e temas personalizados. Sugiro salvá-los antes de limpar.',
+    clearCacheYes: 'Sim',
+    clearCacheNo: 'Não',
+    customLanguages: "Idiomas personalizados",
+    themeNames: {
+      'basic-titanium':  'Titânio natural',
+      'gothic-gold':     'Ouro gótico',
+      'brilliant-bronze':'Bronze brilhante',
+      'desert-titanium': 'Titânio deserto',
+      'midnight-nebula': 'Nebulosa da meia-noite',
+      'emerald-isle':    'Ilha esmeralda',
+      'cyber-pulse':     'Pulso cibernético',
+      'frozen-glacier':  'Glaciar congelado',
+      'crimson-stealth': 'Furtivo carmesim',
+      'rolex-everose':   'Rolex Everose',
+      'obsidian-black':  'Preto obsidiana',
+      'solar-flare':     'Erupção solar',
+      'rainbow-pulse':   'Pulso arco-íris',
+    },
+    languageNames: {
+      'en-GB': 'Inglês (Reino Unido)',
+      'en-US': 'Inglês (EUA)',
+      'en-AU': 'Inglês (Austrália)',
+      'en-CA': 'Inglês (Canadá)',
+      'fr-FR': 'Francês (França)',
+      'fr-CA': 'Francês (Canadá)',
+      'fr-BE': 'Francês (Bélgica)',
+      'fr-CH': 'Francês (Suíça)',
+      'es-ES': 'Espanhol (Espanha)',
+      'es-MX': 'Espanhol (México)',
+      'es-AR': 'Espanhol (Argentina)',
+      'es-CO': 'Espanhol (Colômbia)',
+      'pt-BR': 'Português (Brasil)',
+      'pt-PT': 'Português (Portugal)',
+      'zh-CN': 'Chinês (simplificado)',
+      'zh-TW': 'Chinês (tradicional)',
+      'zh-HK': 'Chinês (Hong Kong)',
+      'ar-SA': 'Árabe (Arábia Saudita)',
+      'ar-EG': 'Árabe (Egito)',
+      'ar-MA': 'Árabe (Marrocos)',
+      'de-DE': 'Alemão (Alemanha)',
+      'de-AT': 'Alemão (Áustria)',
+      'de-CH': 'Alemão (Suíça)',
+      'ja': 'Japonês',
+      'ko': 'Coreano',
+      'ru': 'Russo',
+    },
+  },
+  ko: {
+    noTrackLoaded: '트랙 없음',
+    dragDrop: '오디오 파일을 드래그 앤 드롭',
+    idle: '대기 중',
+    playing: '재생 중',
+    paused: '일시정지',
+    stopped: '정지',
+    loaded: '불러옴',
+    noSongLoaded: '곡이 없습니다',
+    dropAudioFile: '오디오 파일을 놓으세요',
+    playBlocked: '재생 차단됨 (상호작용 필요)',
+    shuffleOn: '셔플: 켜짐',
+    shuffleOff: '셔플: 꺼짐',
+    repeatOff: '반복: 꺼짐',
+    repeatAll: '반복: 전체',
+    repeatOne: '반복: 한 곡',
+    themes: '테마',
+    importTheme: '테마 가져오기',
+    invalidThemeFile: '잘못된 테마 파일 형식',
+    errorParsingTheme: '테마 파일 파싱 오류: ',
+    importLanguage: '언어 가져오기',
+    invalidLangFile: '잘못된 언어 파일 형식',
+    errorParsingLang: '언어 파일 파싱 오류: ',
+    designedIn: '캘리포니아에서 디자인',
+    playerLabel: '음악 플레이어',
+    seekLabel: '트랙 탐색',
+    playbackControls: '재생 컨트롤',
+    playlistLabel: '재생목록',
+    rewindTitle: '5초 뒤로 (Shift+클릭: 10초, Ctrl+클릭: 이전 트랙)',
+    stopTitle: '정지',
+    playTitle: '재생',
+    forwardTitle: '5초 앞으로 (Shift+클릭: 10초, Ctrl+클릭: 다음 트랙)',
+    themesTitle: '테마',
+    uploadTitle: '로컬 오디오 파일 업로드',
+    clearCacheTitle: '이 웹사이트의 모든 캐시를 지우시겠습니까? 사용자 지정 언어와 테마가 모두 삭제됩니다. 지우기 전에 저장하는 것을 권장합니다.',
+    clearCacheYes: '예',
+    clearCacheNo: '아니오',
+    customLanguages: "사용자 지정 언어",
+    themeNames: {
+      'basic-titanium':  '자연 티타늄',
+      'gothic-gold':     '고딕 골드',
+      'brilliant-bronze':'브릴리언트 브론즈',
+      'desert-titanium': '사막 티타늄',
+      'midnight-nebula': '미드나이트 네뷸라',
+      'emerald-isle':    '에메랄드 아일',
+      'cyber-pulse':     '사이버 펄스',
+      'frozen-glacier':  '프로즌 글레이셔',
+      'crimson-stealth': '크림슨 스텔스',
+      'rolex-everose':   '롤렉스 에버로즈',
+      'obsidian-black':  '옵시디안 블랙',
+      'solar-flare':     '솔라 플레어',
+      'rainbow-pulse':   '레인보우 펄스',
+    },
+    languageNames: {
+      'en-GB': '영어 (영국)',
+      'en-US': '영어 (미국)',
+      'en-AU': '영어 (호주)',
+      'en-CA': '영어 (캐나다)',
+      'fr-FR': '프랑스어 (프랑스)',
+      'fr-CA': '프랑스어 (캐나다)',
+      'fr-BE': '프랑스어 (벨기에)',
+      'fr-CH': '프랑스어 (스위스)',
+      'es-ES': '스페인어 (스페인)',
+      'es-MX': '스페인어 (멕시코)',
+      'es-AR': '스페인어 (아르헨티나)',
+      'es-CO': '스페인어 (콜롬비아)',
+      'pt-BR': '포르투갈어 (브라질)',
+      'pt-PT': '포르투갈어 (포르투갈)',
+      'zh-CN': '중국어 (간체)',
+      'zh-TW': '중국어 (번체)',
+      'zh-HK': '중국어 (홍콩)',
+      'ar-SA': '아랍어 (사우디아라비아)',
+      'ar-EG': '아랍어 (이집트)',
+      'ar-MA': '아랍어 (모로코)',
+      'de-DE': '독일어 (독일)',
+      'de-AT': '독일어 (오스트리아)',
+      'de-CH': '독일어 (스위스)',
+      'ja': '일본어',
+      'ko': '한국어',
+      'ru': '러시아어',
+    },
+  },
+  ru: {
+    noTrackLoaded: 'Трек не загружен',
+    dragDrop: 'Перетащите аудиофайл',
+    idle: 'Ожидание',
+    playing: 'Воспроизведение',
+    paused: 'Пауза',
+    stopped: 'Остановлено',
+    loaded: 'Загружено',
+    noSongLoaded: 'Песня не загружена',
+    dropAudioFile: 'Перетащите аудиофайл',
+    playBlocked: 'Воспроизведение заблокировано (требуется взаимодействие)',
+    shuffleOn: 'Перемешать: вкл',
+    shuffleOff: 'Перемешать: выкл',
+    repeatOff: 'Повтор: выкл',
+    repeatAll: 'Повтор: все',
+    repeatOne: 'Повтор: одна',
+    themes: 'Темы',
+    importTheme: 'Импорт темы',
+    invalidThemeFile: 'Неверный формат файла темы',
+    errorParsingTheme: 'Ошибка чтения файла темы: ',
+    importLanguage: 'Импорт языка',
+    invalidLangFile: 'Неверный формат языкового файла',
+    errorParsingLang: 'Ошибка чтения языкового файла: ',
+    designedIn: 'Разработано в Калифорнии',
+    playerLabel: 'Музыкальный плеер',
+    seekLabel: 'Перемотка',
+    playbackControls: 'Управление воспроизведением',
+    playlistLabel: 'Плейлист',
+    rewindTitle: 'Назад 5с (Shift+клик: 10с, Ctrl+клик: предыдущий трек)',
+    stopTitle: 'Стоп',
+    playTitle: 'Воспроизвести',
+    forwardTitle: 'Вперёд 5с (Shift+клик: 10с, Ctrl+клик: следующий трек)',
+    themesTitle: 'Темы',
+    uploadTitle: 'Загрузить локальный аудиофайл',
+    clearCacheTitle: 'Вы уверены, что хотите очистить весь кэш сайта? Это удалит все ваши пользовательские языки и темы. Рекомендую сохранить их перед очисткой.',
+    clearCacheYes: 'Да',
+    clearCacheNo: 'Нет',
+    customLanguages: "Пользовательские языки",
+    themeNames: {
+      'basic-titanium':  'Натуральный титан',
+      'gothic-gold':     'Готическое золото',
+      'brilliant-bronze':'Блестящая бронза',
+      'desert-titanium': 'Пустынный титан',
+      'midnight-nebula': 'Полуночная туманность',
+      'emerald-isle':    'Изумрудный остров',
+      'cyber-pulse':     'Кибер-пульс',
+      'frozen-glacier':  'Замёрзший ледник',
+      'crimson-stealth': 'Багровая тень',
+      'rolex-everose':   'Rolex Everose',
+      'obsidian-black':  'Обсидиановый чёрный',
+      'solar-flare':     'Солнечная вспышка',
+      'rainbow-pulse':   'Радужный пульс',
+    },
+    languageNames: {
+      'en-GB': 'Английский (Великобритания)',
+      'en-US': 'Английский (США)',
+      'en-AU': 'Английский (Австралия)',
+      'en-CA': 'Английский (Канада)',
+      'fr-FR': 'Французский (Франция)',
+      'fr-CA': 'Французский (Канада)',
+      'fr-BE': 'Французский (Бельгия)',
+      'fr-CH': 'Французский (Швейцария)',
+      'es-ES': 'Испанский (Испания)',
+      'es-MX': 'Испанский (Мексика)',
+      'es-AR': 'Испанский (Аргентина)',
+      'es-CO': 'Испанский (Колумбия)',
+      'pt-BR': 'Португальский (Бразилия)',
+      'pt-PT': 'Португальский (Португалия)',
+      'zh-CN': 'Китайский (упрощённый)',
+      'zh-TW': 'Китайский (традиционный)',
+      'zh-HK': 'Китайский (Гонконг)',
+      'ar-SA': 'Арабский (Саудовская Аравия)',
+      'ar-EG': 'Арабский (Египет)',
+      'ar-MA': 'Арабский (Марокко)',
+      'de-DE': 'Немецкий (Германия)',
+      'de-AT': 'Немецкий (Австрия)',
+      'de-CH': 'Немецкий (Швейцария)',
+      'ja': 'Японский',
+      'ko': 'Корейский',
+      'ru': 'Русский',
+    },
+  },
+};
+
+restoreCustomLanguages();
+
+/* ------- Regional variants (inherit from base, override where needed) ------- */
+(function() {
+  /**
+   * Helper to create a regional variant by deep-copying a base language 
+   * and applying specific overrides.
+   */
+  function variant(base, overrides) {
+    const result = JSON.parse(JSON.stringify(I18N[base])); // Deep copy
+    Object.assign(result, overrides);
+    if (overrides.languageNames) result.languageNames = overrides.languageNames;
+    return result;
+  }
+
+  // ── English Variants ───────────────────────────────────────────────────
+  I18N['en-GB'] = variant('en', { uploadAudio: 'Import Audio' });
+  I18N['en-US'] = variant('en', { uploadAudio: 'Upload Audio' });
+  I18N['en-AU'] = variant('en', { uploadAudio: 'Add Audio' });
+  I18N['en-CA'] = variant('en', { uploadAudio: 'Select Audio' });
+
+  // ── French Variants ────────────────────────────────────────────────────
+  I18N['fr-FR'] = variant('fr', { uploadAudio: 'Charger de l\'audio' });
+  I18N['fr-CA'] = variant('fr', { uploadAudio: 'Téléverser de l\'audio' });
+  I18N['fr-BE'] = variant('fr', { uploadAudio: 'Importer de l\'audio' });
+  I18N['fr-CH'] = variant('fr', { uploadAudio: 'Ajouter de l\'audio' });
+
+  // ── Spanish Variants ───────────────────────────────────────────────────
+  I18N['es-ES'] = variant('es', { uploadAudio: 'Subir audio' });
+  I18N['es-MX'] = variant('es', { uploadAudio: 'Cargar audio' });
+  I18N['es-AR'] = variant('es', { uploadAudio: 'Añadir audio' });
+  I18N['es-CO'] = variant('es', { uploadAudio: 'Importar audio' });
+
+  // ── Portuguese Variants ────────────────────────────────────────────────
+  I18N['pt-BR'] = variant('pt', { uploadAudio: 'Carregar áudio' });
+  I18N['pt-PT'] = variant('pt', { uploadAudio: 'Importar áudio' });
+
+  // ── German Variants ────────────────────────────────────────────────────
+  I18N['de-DE'] = variant('de', { uploadAudio: 'Audio hochladen' });
+  I18N['de-AT'] = variant('de', { uploadAudio: 'Audio importieren' });
+  I18N['de-CH'] = variant('de', { uploadAudio: 'Audio hinzufügen' });
+
+  // ── Chinese Variants (Traditional Overrides) ──────────────────────────
+  I18N['zh-CN'] = variant('zh', { uploadAudio: '上传音频' }); // Simplified
+  I18N['zh-TW'] = variant('zh', { 
+    noTrackLoaded: '未載入曲目',
+    dragDrop: '拖放音訊檔案',
+    uploadAudio: '上傳音訊',
+    playerLabel: '主題音樂播放器',
+    playlistLabel: '播放列表'
+  }); // Traditional (Taiwan)
+  I18N['zh-HK'] = variant('zh', { 
+    noTrackLoaded: '未載入曲目',
+    dragDrop: '拖放音訊檔案',
+    uploadAudio: '上傳檔案', 
+    playerLabel: '主題音樂播放器',
+    playlistLabel: '播放清單'
+  }); // Traditional (Hong Kong)
+
+  // ── Arabic Variants ────────────────────────────────────────────────────
+  I18N['ar-SA'] = variant('ar', { uploadAudio: 'رفع ملف صوتي' });
+  I18N['ar-EG'] = variant('ar', { uploadAudio: 'تحميل ملف صوتي' });
+  I18N['ar-MA'] = variant('ar', { uploadAudio: 'استيراد ملف صوتي' });
+
+})();
+
+function detectLanguage() {
+  const raw = (navigator.language || navigator.userLanguage || 'en');
+  const lang = raw.toLowerCase().replace('_', '-');
+  // Exact regional match first
+  const map = {
+    'en-gb': 'en-GB', 'en-us': 'en-US', 'en-au': 'en-AU', 'en-ca': 'en-CA',
+    'fr-fr': 'fr-FR', 'fr-ca': 'fr-CA', 'fr-be': 'fr-BE', 'fr-ch': 'fr-CH',
+    'es-es': 'es-ES', 'es-mx': 'es-MX', 'es-ar': 'es-AR', 'es-co': 'es-CO',
+    'pt-br': 'pt-BR', 'pt-pt': 'pt-PT',
+    'zh-cn': 'zh-CN', 'zh-tw': 'zh-TW', 'zh-hk': 'zh-HK',
+    'ar-sa': 'ar-SA', 'ar-eg': 'ar-EG', 'ar-ma': 'ar-MA',
+    'de-de': 'de-DE', 'de-at': 'de-AT', 'de-ch': 'de-CH',
+  };
+  if (map[lang]) return map[lang];
+  // Base language fallbacks
+  if (lang.startsWith('en')) return 'en-GB';
+  if (lang.startsWith('fr')) return 'fr-FR';
+  if (lang.startsWith('es')) return 'es-ES';
+  if (lang.startsWith('pt')) return 'pt-BR';
+  if (lang.startsWith('zh')) return 'zh-CN';
+  if (lang.startsWith('ar')) return 'ar-SA';
+  if (lang.startsWith('de')) return 'de-DE';
+  if (lang.startsWith('ja')) return 'ja';
+  if (lang.startsWith('ko')) return 'ko';
+  if (lang.startsWith('ru')) return 'ru';
+  return 'en-GB';
+}
+
+const LANG = localStorage.getItem('selectedLang') || detectLanguage();
+let _activeLang = LANG;
+const t = (key) => {
+  if (I18N[_activeLang] && I18N[_activeLang][key] !== undefined) return I18N[_activeLang][key];
+  const baseLang = _activeLang.includes('-') ? _activeLang.split('-')[0].toLowerCase() : null;
+  if (baseLang && I18N[baseLang] && I18N[baseLang][key] !== undefined) return I18N[baseLang][key];
+  return (I18N['en'] && I18N['en'][key]) || key;
+};
+
+// Apply direction and lang on initial load
+document.documentElement.setAttribute('dir', _activeLang.startsWith('ar') ? 'rtl' : 'ltr');
+document.documentElement.setAttribute('lang', _activeLang);
+
 /* ------- Configuration ------- */
 const ANIMATION_CURVES = ['sine','quad','cubic','quart','quint','expo','circ','back','elastic','bounce'];
 const ANIMATION_SPEEDS = ['in','out','inout']; // speed direction variants
@@ -385,11 +1324,31 @@ const themeBtn = document.getElementById('themeBtn');
 const themePanel = document.getElementById('themePanel');
 const themeList = document.getElementById('themeList');
 const themeImportInput = document.getElementById('themeImportInput');
+const langImportInput  = document.getElementById('langImportInput');
 
 state.isChangingTheme = false
 let progressAnimationId;
 
-/* ------- Utilities ------- */
+/* ------- Apply i18n to DOM ------- */
+function applyI18nToDOM() {
+  // Text content
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  // title attributes
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    const key = el.getAttribute('data-i18n-title');
+    el.title = t(key);
+  });
+  // aria-label attributes
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+    const key = el.getAttribute('data-i18n-aria-label');
+    el.setAttribute('aria-label', t(key));
+  });
+}
+
+
 function fmtTime(s){
   if(!isFinite(s)) return '00:00';
   s = Math.floor(s);
@@ -815,8 +1774,8 @@ function removeTrack(index, skipAnimation = false){
       if(isCurrent){
         stopAudio();
         state.audio.src = '';
-        titleEl.textContent = 'No song loaded';
-        artistEl.textContent = 'Drop an audio file';
+        titleEl.textContent = t('noSongLoaded');
+        artistEl.textContent = t('dropAudioFile');
         albumArtImg.style.display = 'none';
         musicNoteSVG.style.display = 'block';
         seekRange.value = 0;
@@ -838,8 +1797,8 @@ function removeTrack(index, skipAnimation = false){
     if(isCurrent){
       stopAudio();
       state.audio.src = '';
-      titleEl.textContent = 'No song loaded';
-      artistEl.textContent = 'Drop an audio file';
+      titleEl.textContent = t('noSongLoaded');
+      artistEl.textContent = t('dropAudioFile');
       albumArtImg.style.display = 'none';
       musicNoteSVG.style.display = 'block';
       seekRange.value = 0;
@@ -1002,7 +1961,7 @@ function loadTrack(index, opts={autoplay:false}){
   refreshActiveTrackUI();
   scrollActiveTrackIntoView(); // ✅ ADD THIS
 
-  statusDisplay.textContent = 'Loaded';
+  statusDisplay.textContent = t('loaded');
 
   if(opts.autoplay){
     playAudio();
@@ -1026,7 +1985,7 @@ function playAudio(){
 
   state.audio.play().catch(err=>{
     console.warn('Play prevented', err);
-    statusDisplay.textContent = 'Play blocked (interaction required)';
+    statusDisplay.textContent = t('playBlocked');
   });
 }
 
@@ -1038,7 +1997,7 @@ function stopAudio(){
   state.audio.pause();
   state.audio.currentTime = 0;
   state.isPlaying = false;
-  statusDisplay.textContent = 'Stopped';
+  statusDisplay.textContent = t('stopped');
   seekRange.value = 0;
   syncPlaybackStateFromAudio();
   togglePlayIcon(false);
@@ -1164,7 +2123,7 @@ shuffleBtn.addEventListener('click', ()=>{
   shuffleBtn.classList.toggle('active', state.shuffle);
   
   // Accessibility and Title update
-  shuffleBtn.title = `Shuffle: ${state.shuffle ? 'on' : 'off'}`;
+  shuffleBtn.title = state.shuffle ? t('shuffleOn') : t('shuffleOff');
 });
 
 repeatBtn.addEventListener('click', ()=>{
@@ -1174,15 +2133,15 @@ repeatBtn.addEventListener('click', ()=>{
   // Logic for visual states (CSS handled)
   if(state.repeatMode === 0) {
     repeatBtn.classList.remove('active', 'active-one');
-    repeatBtn.title = "Repeat: Off";
+    repeatBtn.title = t('repeatOff');
   } else if (state.repeatMode === 1) {
     repeatBtn.classList.add('active');
     repeatBtn.classList.remove('active-one');
-    repeatBtn.title = "Repeat: All";
+    repeatBtn.title = t('repeatAll');
   } else {
     // Both active (for glow) and active-one (to show the "1" badge)
     repeatBtn.classList.add('active', 'active-one');
-    repeatBtn.title = "Repeat: One";
+    repeatBtn.title = t('repeatOne');
   }
 });
 
@@ -1253,7 +2212,117 @@ window.addEventListener('keydown', (ev)=>{
     ev.preventDefault();
     if(state.isPlaying) pauseAudio(); else playAudio();
   }
+  // Ctrl+Shift+R (or Cmd+Shift+R on Mac) — clear cache prompt
+  if(ev.code === 'KeyR' && ev.shiftKey && (ev.ctrlKey || ev.metaKey)){
+    ev.preventDefault();
+    showClearCacheModal();
+  }
 });
+
+function showClearCacheModal() {
+  // Remove any existing modal
+  const existing = document.getElementById('clearCacheModal');
+  if (existing) existing.remove();
+
+  const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+
+  const overlay = document.createElement('div');
+  overlay.id = 'clearCacheModal';
+  Object.assign(overlay.style, {
+    position: 'fixed', inset: '0', zIndex: '99999',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    background: 'rgba(0,0,0,0.65)',
+    backdropFilter: 'blur(8px)',
+    animation: 'fadeIn 0.18s ease',
+  });
+
+  const box = document.createElement('div');
+  Object.assign(box.style, {
+    background: 'var(--titanium-light, #1a1a1c)',
+    border: '1px solid var(--titanium-border, rgba(255,255,255,0.12))',
+    borderRadius: '16px',
+    padding: '28px 28px 22px',
+    maxWidth: '420px',
+    width: '90%',
+    boxShadow: '0 24px 64px rgba(0,0,0,0.6)',
+    color: 'var(--text-main, #f5f5f7)',
+    fontFamily: 'inherit',
+    direction: isRTL ? 'rtl' : 'ltr',
+    textAlign: isRTL ? 'right' : 'left',
+    animation: 'scaleIn 0.2s cubic-bezier(0.34,1.56,0.64,1)',
+  });
+
+  const msg = document.createElement('p');
+  msg.textContent = t('clearCacheTitle');
+  Object.assign(msg.style, {
+    margin: '0 0 22px', fontSize: '14px', lineHeight: '1.6',
+    color: 'var(--text-main, #f5f5f7)',
+  });
+
+  const btnRow = document.createElement('div');
+  Object.assign(btnRow.style, {
+    display: 'flex', gap: '10px',
+    flexDirection: isRTL ? 'row-reverse' : 'row',
+    justifyContent: 'flex-end',
+  });
+
+  function makeBtn(label, primary) {
+    const btn = document.createElement('button');
+    btn.textContent = label;
+    Object.assign(btn.style, {
+      padding: '10px',
+      minWidth: '70px',
+      border: primary ? 'none' : '1px solid rgba(255,255,255,0.15)',
+      borderRadius: '8px',
+      cursor: 'pointer',
+      fontSize: '14px',
+      fontFamily: 'inherit',
+      fontWeight: '600',
+      background: primary ? 'var(--color-primary, #FFD700)' : 'rgba(255,255,255,0.06)',
+      color: primary ? 'var(--titanium-dark, #0a0a0c)' : 'var(--text-main, #f5f5f7)',
+      transition: 'opacity 0.15s',
+    });
+    btn.addEventListener('mouseover', () => btn.style.opacity = '0.8');
+    btn.addEventListener('mouseout',  () => btn.style.opacity = '1');
+    return btn;
+  }
+
+  const yesBtn = makeBtn(t('clearCacheYes'), true);
+  const noBtn  = makeBtn(t('clearCacheNo'),  false);
+
+  const ANIM_DURATION = 200;
+
+  function dismissModal() {
+    box.style.animation     = `scaleOut ${ANIM_DURATION}ms cubic-bezier(0.34,1.56,0.64,1) forwards`;
+    overlay.style.animation = `fadeOut  ${ANIM_DURATION}ms ease forwards`;
+    setTimeout(() => overlay.remove(), ANIM_DURATION);
+  }
+
+  yesBtn.addEventListener('click', () => {
+    localStorage.clear();
+    location.reload();
+  });
+
+  noBtn.addEventListener('click', () => dismissModal());
+
+  // Close on overlay click outside box
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) dismissModal();
+  });
+
+  // Close on Escape
+  function onEsc(e) {
+    if (e.key === 'Escape') { dismissModal(); window.removeEventListener('keydown', onEsc); }
+  }
+  window.addEventListener('keydown', onEsc);
+
+  btnRow.appendChild(noBtn);
+  btnRow.appendChild(yesBtn);
+  box.appendChild(msg);
+  box.appendChild(btnRow);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+}
 
 /* Audio file drag & drop onto left panel */
 const leftPanel = document.getElementById('leftPanel');
@@ -1292,6 +2361,13 @@ observer.observe(playlistEl, { childList:true, subtree:false });
 
 /* ------- Initialise on load ------- */
 document.addEventListener('DOMContentLoaded', ()=> {
+  // _activeLang is already set from localStorage/detectLanguage at the top,
+  // so just render the list and update the panel title silently.
+  currentLang = _activeLang;
+  renderLangList();
+  document.getElementById('langPanelTitle').textContent = getLangPanelTitle(_activeLang);
+
+  applyI18nToDOM();
   initRandomAnimations();
 
   // Build placeholder visualiser bars
@@ -1319,13 +2395,13 @@ function syncPlaybackStateFromAudio(){
   playBtn.setAttribute('aria-pressed', String(playing));
 
   if(playing){
-    statusDisplay.textContent = 'Playing';
+    statusDisplay.textContent = t('playing');
     if(state.analyser) startVisualiser();
     if (!state.progressRafId) {
-      state.progressRafId = requestAnimationFrame(updateSmoothProgress);
+      state.progressRafId = requestAnimationFrame(updateProgress);
     }
   } else {
-    statusDisplay.textContent = state.audio.ended ? 'Stopped' : 'Paused';
+    statusDisplay.textContent = state.audio.ended ? t('stopped') : t('paused');
     if(state.rafId) cancelAnimationFrame(state.rafId);
     if (state.progressRafId) {cancelAnimationFrame(state.progressRafId); state.progressRafId = null}
   }
@@ -1524,49 +2600,72 @@ function updatePlayButtonAnimation() {
 
 function applyTheme(themeKey, animate = true) {
   const theme = THEMES[themeKey];
-  if (!theme || state.isThemeChanging) return;
+  if (!theme) return;
 
-  // Use the global transition overlay
-  let overlay = document.getElementById('theme-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.id = 'theme-overlay';
-    document.body.appendChild(overlay);
-    
-    // Initial Styles for Overlay
-    Object.assign(overlay.style, {
-      position: 'fixed',
-      inset: '0',
-      zIndex: '10000', // Higher than theme panel
-      backdropFilter: 'blur(0px)',
-      backgroundColor: 'rgba(0,0,0,0)',
-      pointerEvents: 'none',
-      transition: 'backdrop-filter 0.6s ease, background-color 0.6s ease'
-    });
-  }
+  const player = document.querySelector('.player');
+  const root = document.documentElement;
+  
+  // 1. Animation Logic
+  if (state.isChangingTheme) return;
+  const duration = 400;
 
   if (animate) {
-    state.isThemeChanging = true;
-    overlay.style.backdropFilter = 'blur(30px)';
-    overlay.style.backgroundColor = 'rgba(0,0,0,0.3)';
-    overlay.style.pointerEvents = 'auto'; // Locks clicks
+    state.isChangingTheme = true;
+    player.style.filter = 'blur(20px)';
+    player.style.transition = `filter ${duration/2}ms ease`;
+  }
 
-    // Mid-point: Change colors while screen is fully blurred
-    setTimeout(() => {
-      executeColorSwap(themeKey, theme);
+  // 2. State & Persistence
+  state.currentTheme = themeKey;
+  localStorage.setItem('selectedTheme', themeKey);
+
+  // 3. Apply Colors (Handles both --color-primary AND primaryColor formats)
+  for (const [key, value] of Object.entries(theme.colors)) {
+    if (key.startsWith('--')) {
+      // Direct CSS Variable (e.g., "--color-primary")
+      root.style.setProperty(key, value);
+    } else {
+      // camelCase conversion (e.g., "primaryColor" -> "--color-primary")
+      // Specifically map your known script variables to CSS variables
+      const mapping = {
+        'primaryColor': '--color-primary',
+        'primaryBright': '--color-bright',
+        'primaryDeep': '--color-deep',
+        'primaryGlow': '--color-glow',
+        'primarySheen': '--color-sheen',
+        'titaniumDark': '--titanium-dark',
+        'titaniumLight': '--titanium-light',
+        'titaniumBorder': '--titanium-border',
+        'textMain': '--text-main',
+        'textMuted': '--text-muted'
+      };
       
-      // Fade out
-      overlay.style.backdropFilter = 'blur(0px)';
-      overlay.style.backgroundColor = 'rgba(0,0,0,0)';
-      overlay.style.pointerEvents = 'none';
+      root.style.setProperty(mapping[key] || key, value);
+    }
+  }
 
-      setTimeout(() => {
-        state.isThemeChanging = false;
-      }, 600);
+  // 4. Cleanup & UI Refresh
+  if (animate) {
+    state.isChangingTheme = true;
+    document.querySelector('.player').style.filter = 'blur(20px)';
+    
+    setTimeout(() => {
+      document.querySelector('.player').style.filter = '';
+      state.isChangingTheme = false;
+      
+      // RE-RENDER THE LIST HERE to move the 'active' class
+      renderThemeList(); 
     }, 400);
   } else {
-    executeColorSwap(themeKey, theme);
+    renderThemeList();
   }
+
+  // Restart animations if the theme is dynamic
+  stopRainbowAnimation(); //
+  if (theme.animated) {
+      startRainbowAnimation(); //
+  }
+  updatePlayButtonAnimation(); //
 }
 
 function executeColorSwap(themeKey, theme) {
@@ -1578,6 +2677,7 @@ function executeColorSwap(themeKey, theme) {
   // Map theme colors to CSS variables
   root.style.setProperty('--titanium-dark', colors.titaniumDark);
   root.style.setProperty('--titanium-light', colors.titaniumLight);
+  root.style.setProperty('--titanium-border', colors.titaniumBorder);
   root.style.setProperty('--color-primary', colors.primaryColor);
   root.style.setProperty('--color-bright', colors.primaryBright);
   root.style.setProperty('--color-deep', colors.primaryDeep);
@@ -1590,6 +2690,7 @@ function executeColorSwap(themeKey, theme) {
   stopRainbowAnimation();
   if (theme.animated) startRainbowAnimation();
   
+  updatePlayButtonAnimation();
   updateThemeListUI();
   localStorage.setItem('selectedTheme', themeKey);
 }
@@ -1615,14 +2716,26 @@ function performThemeVariableSwap(themeKey, theme) {
 function exportTheme(themeKey) {
   const theme = THEMES[themeKey];
   if (!theme) return;
-  
-  const themeData = JSON.stringify(theme, null, 2);
-  const blob = new Blob([themeData], { type: 'application/json' });
+
+  // Prepare the data (ensuring it has the 'custom' flag for when it's re-imported)
+  const exportData = {
+    ...theme,
+    custom: true 
+  };
+
+  const jsonString = JSON.stringify(exportData, null, 2);
+  const blob = new Blob([jsonString], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${themeKey}-theme.json`;
-  a.click();
+  
+  // Create a temporary link and click it programmatically
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${theme.name.replace(/\s+/g, '_').toLowerCase()}_theme.json`;
+  document.body.appendChild(link);
+  link.click();
+  
+  // Cleanup
+  document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
 
@@ -1632,24 +2745,74 @@ function importTheme(file) {
     try {
       const themeData = JSON.parse(e.target.result);
       
-      // Validate theme structure
+      // 1. Validation: Ensure it has a name and colors
       if (!themeData.name || !themeData.colors) {
-        alert('Invalid theme file format');
-        return;
+        throw new Error(t('invalidThemeFile'));
       }
-      
-      // Generate a unique key
+
+      // 2. Generate a unique key and force 'custom' flag
       const themeKey = 'custom-' + Date.now();
+      themeData.custom = true; 
+
+      // 3. Add to the global THEMES object
       THEMES[themeKey] = themeData;
+
+      // 4. Persistence & UI Update
+      saveCustomThemes(); // Save to localStorage
+      renderThemeList();  // Re-build the HTML list (including headers)
       
-      // Render the new theme in the list
-      renderThemeList();
-      
-      // Apply the imported theme
+      // 5. Apply the theme immediately
       applyTheme(themeKey, true);
+
+      console.log(`Imported theme: ${themeData.name}`);
+    } catch (err) {
+      // If it fails, ensure the blur is removed
+      state.isChangingTheme = false; 
+      document.querySelector('.player').style.filter = '';
+      alert(t('errorParsingTheme') + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function exportLanguage(code) {
+  const lang = I18N[code];
+  if (!lang) return;
+  const meta = LANGUAGES.find(l => l.code === code) || { label: code, flag: '' };
+  const langData = JSON.stringify({ code, label: meta.label, flag: meta.flag, strings: lang }, null, 2);
+  const blob = new Blob([langData], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${code}-language.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importLanguageFile(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      const code = data.code || 'custom-' + Date.now();
       
-    } catch (error) {
-      alert('Error parsing theme file: ' + error.message);
+      // Add to main language array
+      LANGUAGES.push({
+        code: code,
+        label: data.label || code.toUpperCase(),
+        flag: data.flag || '🌐',
+        custom: true // Ensure this flag is set!
+      });
+      
+      I18N[code] = data.translations || data;
+
+      // IMMEDIATE UPDATES
+      saveCustomLanguages(); 
+      renderLangList(); // This will now show the header immediately
+      
+      console.log("Language imported successfully");
+    } catch (err) {
+      alert("Error importing language: " + err.message);
     }
   };
   reader.readAsText(file);
@@ -1657,48 +2820,71 @@ function importTheme(file) {
 
 function renderThemeList() {
   themeList.innerHTML = '';
-  
-  Object.keys(THEMES).forEach(themeKey => {
-    const theme = THEMES[themeKey];
-    const themeItem = document.createElement('div');
-    themeItem.className = 'theme-item' + (state.currentTheme === themeKey ? ' active' : '');
-    themeItem.dataset.themeKey = themeKey;
+
+  const builtInKeys = Object.keys(THEMES).filter(k => !THEMES[k].custom);
+  const customKeys  = Object.keys(THEMES).filter(k =>  THEMES[k].custom);
+
+  function makeThemeItem(key) {
+    const theme = THEMES[key];
+    const item = document.createElement('div');
+    item.className = 'theme-item';
     
-    // Create color preview
-    const preview = document.createElement('div');
-    preview.className = 'theme-preview';
-    
-    // Special rainbow gradient for animated theme
-    if (theme.animated && theme.colorCycle) {
-      preview.style.background = `linear-gradient(135deg, #FF0000, #FF8800, #FFFF00, #88FF00, #00FF00, #0088FF, #00FFFF, #FF00FF, #8800FF)`;
-      preview.style.backgroundSize = '200% 200%';
-      preview.style.animation = 'rainbow-preview 3s linear infinite';
-    } else {
-      preview.style.background = `linear-gradient(135deg, ${theme.colors.primaryColor}, ${theme.colors.primaryDeep})`;
+    // Add active class if this is the current theme
+    if (state.currentTheme === key) {
+      item.classList.add('active');
     }
     
-    const name = document.createElement('div');
-    name.className = 'theme-name';
-    name.textContent = theme.name;
+    // Create the preview dot
+    const dot = document.createElement('div');
+    dot.className = 'theme-dot';
     
-    themeItem.appendChild(preview);
-    themeItem.appendChild(name);
+    // Extract primary color for the dot (checks both camelCase and CSS variable naming)
+    const dotColor = theme.colors.primaryColor || 
+                    theme.colors['--color-primary'] || 
+                    '#FFD700';
     
-    // Left click: apply theme
-    themeItem.addEventListener('click', (e) => {
-      applyTheme(themeKey, true);
+    dot.style.background = dotColor;
+    dot.style.boxShadow = `0 0 8px ${dotColor}44`; // Adds a subtle glow to the dot
+    
+    const label = document.createElement('span');
+    label.textContent = theme.name;
+    
+    item.appendChild(dot);
+    item.appendChild(label);
+
+    item.addEventListener('click', () => applyTheme(key));
+
+    // Right click: Save/Export theme
+    item.addEventListener('contextmenu', (e) => {
+      e.preventDefault(); // Stop the default browser right-click menu
+      exportTheme(key); // Trigger the download
     });
-    
-    // Right click: export theme
-    themeItem.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-      exportTheme(themeKey);
+
+    item.addEventListener('dblclick', () => {
+      if (theme.custom) {
+        if (confirm(`Delete theme "${theme.name}"?`)) {
+          if (state.currentTheme === key) applyTheme('titanium', true);
+          delete THEMES[key];
+          saveCustomThemes();
+          renderThemeList();
+        }
+      }
     });
-    
-    themeList.appendChild(themeItem);
-  });
-  
-  // Add import button
+
+    return item;
+  }
+
+  builtInKeys.forEach(k => themeList.appendChild(makeThemeItem(k)));
+
+  if (customKeys.length > 0) {
+    const sep = document.createElement('div');
+    sep.className = 'lang-group-header';
+    sep.textContent = 'Custom Themes';
+    themeList.appendChild(sep);
+    customKeys.forEach(k => themeList.appendChild(makeThemeItem(k)));
+  }
+
+  // Import button
   const importBtn = document.createElement('div');
   importBtn.className = 'theme-item import-theme';
   importBtn.innerHTML = `
@@ -1709,13 +2895,9 @@ function renderThemeList() {
         <line x1="12" y1="3" x2="12" y2="15"></line>
       </svg>
     </div>
-    <div class="theme-name">Import Theme</div>
+    <div class="theme-name">${t('importTheme')}</div>
   `;
-  
-  importBtn.addEventListener('click', () => {
-    themeImportInput.click();
-  });
-  
+  importBtn.addEventListener('click', () => themeImportInput.click());
   themeList.appendChild(importBtn);
 }
 
@@ -1750,6 +2932,25 @@ function setTheme(themeKey) {
   }, duration / 2);
 }
 
+function deleteTheme(key) {
+  const themeName = THEMES[key].name;
+  
+  // Confirmation dialog
+  if (!confirm(`Delete theme "${themeName}"?`)) return;
+
+  // If the user is currently using this theme, switch to default first
+  if (state.currentTheme === key) {
+    applyTheme('titanium', false); 
+  }
+
+  // Remove from the global object
+  delete THEMES[key];
+
+  // Update Storage and UI
+  saveCustomThemes();
+  renderThemeList();
+}
+
 function updateThemeListUI() {
   const items = document.querySelectorAll('.theme-item');
   items.forEach(item => {
@@ -1769,64 +2970,256 @@ function toggleThemePanel() {
     themePanel.classList.remove('open');
     themeBtn.classList.remove('active');
   } else {
+    // Close lang panel if open
+    langPanel.classList.remove('open');
+    langBtn.classList.remove('active');
     themePanel.classList.add('open');
     themeBtn.classList.add('active');
   }
 }
 
-function applyTheme(themeKey, animate = true) {
-  const theme = THEMES[themeKey];
-  if (!theme || state.isTransitioning) return; // Prevent overlapping transitions
+/* ------- Language Panel System ------- */
+const LANGUAGES = [
+  { group: 'English' },
+  { code: 'en-GB', label: 'English (UK)',          flag: '🇬🇧' },
+  { code: 'en-US', label: 'English (US)',          flag: '🇺🇸' },
+  { code: 'en-AU', label: 'English (Australia)',   flag: '🇦🇺' },
+  { code: 'en-CA', label: 'English (Canada)',      flag: '🇨🇦' },
 
-  const root = document.documentElement;
-  const player = document.querySelector('.player');
+  { group: 'Français' },
+  { code: 'fr-FR', label: 'Français (France)',     flag: '🇫🇷' },
+  { code: 'fr-CA', label: 'Français (Canada)',     flag: '🇨🇦' },
+  { code: 'fr-BE', label: 'Français (Belgique)',   flag: '🇧🇪' },
+  { code: 'fr-CH', label: 'Français (Suisse)',     flag: '🇨🇭' },
 
-  if (animate) {
-    state.isTransitioning = true;
-    player.classList.add('theme-transitioning');
+  { group: 'Español' },
+  { code: 'es-ES', label: 'Español (España)',      flag: '🇪🇸' },
+  { code: 'es-MX', label: 'Español (México)',      flag: '🇲🇽' },
+  { code: 'es-AR', label: 'Español (Argentina)',   flag: '🇦🇷' },
+  { code: 'es-CO', label: 'Español (Colombia)',    flag: '🇨🇴' },
 
-    // Wait for the blur to reach its peak before swapping colors
-    setTimeout(() => {
-      performThemeSwap(themeKey, theme);
-      
-      // Remove blur
-      player.classList.remove('theme-transitioning');
-      
-      // Unlock after the blur fades out
-      setTimeout(() => {
-        state.isTransitioning = false;
-      }, 600);
-    }, 300); 
-  } else {
-    performThemeSwap(themeKey, theme);
+  { group: 'Português' },
+  { code: 'pt-BR', label: 'Português (Brasil)',    flag: '🇧🇷' },
+  { code: 'pt-PT', label: 'Português (Portugal)',  flag: '🇵🇹' },
+
+  { group: '中文' },
+  { code: 'zh-CN', label: '中文（简体）',             flag: '🇨🇳' },
+  { code: 'zh-TW', label: '中文（繁體）',             flag: '🇹🇼' },
+  { code: 'zh-HK', label: '中文（香港）',             flag: '🇭🇰' },
+
+  { group: 'العربية' },
+  { code: 'ar-SA', label: 'العربية (السعودية)',    flag: '🇸🇦' },
+  { code: 'ar-EG', label: 'العربية (مصر)',         flag: '🇪🇬' },
+  { code: 'ar-MA', label: 'العربية (المغرب)',      flag: '🇲🇦' },
+
+  { group: 'Deutsch' },
+  { code: 'de-DE', label: 'Deutsch (Deutschland)', flag: '🇩🇪' },
+  { code: 'de-AT', label: 'Deutsch (Österreich)',  flag: '🇦🇹' },
+  { code: 'de-CH', label: 'Deutsch (Schweiz)',     flag: '🇨🇭' },
+
+  { group: 'その他 / 기타 / Другие' },
+  { code: 'ja',    label: '日本語',                 flag: '🇯🇵' },
+  { code: 'ko',    label: '한국어',                 flag: '🇰🇷' },
+  { code: 'ru',    label: 'Русский',               flag: '🇷🇺' },
+];
+
+const langBtn   = document.getElementById('langBtn');
+const langPanel = document.getElementById('langPanel');
+const langList  = document.getElementById('langList');
+
+let currentLang = _activeLang; // starts from saved/auto-detected lang
+
+function renderLangList() {
+  langList.innerHTML = '';
+  const languageNames = t('languageNames') || {};
+
+  // 1. Separate built-in and custom for header logic
+  const builtInLangs = LANGUAGES.filter(l => !l.custom && !l.group);
+  const customLangs = LANGUAGES.filter(l => l.custom);
+
+  // 2. Helper function to create language items (prevents code repetition)
+  const createItem = (entry) => {
+    const { code, label, flag, custom } = entry;
+    const item = document.createElement('div');
+    item.className = 'theme-item' + (currentLang === code ? ' active' : '');
+    item.dataset.code = code;
+    item.dataset.custom = custom ? 'true' : 'false';
+
+    const flagEl = document.createElement('div');
+    flagEl.className = 'lang-flag';
+    flagEl.textContent = flag;
+
+    const nameEl = document.createElement('div');
+    nameEl.className = 'theme-name';
+    nameEl.textContent = languageNames[code] || label;
+
+    item.appendChild(flagEl);
+    item.appendChild(nameEl);
+
+    // Click handling (Single for select / Double for delete)
+    let clickTimer = null;
+    item.addEventListener('click', (e) => {
+      if (clickTimer) {
+        clearTimeout(clickTimer);
+        clickTimer = null;
+        if (item.dataset.custom === 'true') {
+          if (confirm(`${t('deleteLanguage') || 'Delete language'} "${label}"?`)) {
+            const wasActive = currentLang === code;
+            const idx = LANGUAGES.findIndex(l => l.code === code);
+            if (idx !== -1) LANGUAGES.splice(idx, 1);
+            
+            delete I18N[code];
+            saveCustomLanguages();
+            renderLangList();
+            
+            if (wasActive) {
+              const detected = detectLanguage();
+              switchLanguage(detected, true);
+            }
+          }
+        }
+      } else {
+        clickTimer = setTimeout(() => {
+          switchLanguage(code, true);
+          clickTimer = null;
+        }, 250);
+      }
+    });
+
+    // Right-click: export
+    item.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      exportLanguage(code);
+    });
+
+    return item;
+  };
+
+  // 3. Render Built-in Languages
+  builtInLangs.forEach(lang => langList.appendChild(createItem(lang)));
+
+  // 4. DYNAMIC CUSTOM HEADER: Inject only if custom languages exist
+  if (customLangs.length > 0) {
+    const header = document.createElement('div');
+    header.className = 'lang-group-header';
+    header.textContent = t('customLanguages') || 'Custom Languages';
+    header.style.marginTop = '10px';
+    langList.appendChild(header);
+
+    customLangs.forEach(lang => langList.appendChild(createItem(lang)));
+  }
+
+  // 5. Import Language button
+  const importBtn = document.createElement('div');
+  importBtn.className = 'theme-item import-theme';
+  importBtn.style.marginTop = '10px';
+  importBtn.innerHTML = `
+    <div class="lang-flag" style="display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 2px dashed rgba(255,255,255,0.2); border-radius: 50%; width: 24px; height: 24px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+      </svg>
+    </div>
+    <div class="theme-name" style="margin-left: 12px;">${t('importLanguage')}</div>
+  `;
+  importBtn.onclick = () => langImportInput.click();
+  langList.appendChild(importBtn);
+}
+
+function switchLanguage(code, silent = false) {
+  if (code === currentLang && !silent) return;
+
+  currentLang = code;
+  _activeLang = code;
+
+  // RTL toggle — covers all Arabic regional variants
+  document.documentElement.setAttribute('dir', code.startsWith('ar') ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', code);
+
+  // Re-apply all DOM translations
+  applyI18nToDOM();
+
+  // Re-translate live status display
+  const statusKeys = ['playing', 'paused', 'stopped', 'idle', 'loaded'];
+  for (const key of statusKeys) {
+    const matchesAnyLang = Object.values(I18N).some(l => l[key] === statusDisplay.textContent);
+    if (matchesAnyLang) {
+      statusDisplay.textContent = t(key);
+      break;
+    }
+  }
+
+  // Update shuffle/repeat button titles
+  shuffleBtn.title = state.shuffle ? t('shuffleOn') : t('shuffleOff');
+  const repeatTitles = [t('repeatOff'), t('repeatAll'), t('repeatOne')];
+  repeatBtn.title = repeatTitles[state.repeatMode];
+
+  // Update no-track state if no song loaded
+  if (state.currentIndex === -1) {
+    titleEl.textContent  = t('noTrackLoaded');
+    artistEl.textContent = t('dragDrop');
+  }
+
+  // Update theme panel header
+  document.querySelector('.theme-panel-header h3').textContent = t('themes');
+
+  // Update lang panel header
+  document.getElementById('langPanelTitle').textContent = getLangPanelTitle(code);
+
+  // Persist choice
+  localStorage.setItem('selectedLang', code);
+
+  // Re-render both lists so translated names appear immediately
+  renderThemeList();
+  renderLangList();
+
+  // Removed auto-toggle; panel stays open on selection
+  if (!silent) {
+    // Optional: You can add a notification or visual feedback here if needed
   }
 }
 
-// Helper to handle the actual variable swapping
-function performThemeSwap(themeKey, theme) {
-  const root = document.documentElement;
-  const colors = theme.colors;
-  
-  stopRainbowAnimation();
-  state.currentTheme = themeKey;
-
-  root.style.setProperty('--titanium-dark', colors.titaniumDark);
-  root.style.setProperty('--titanium-light', colors.titaniumLight);
-  root.style.setProperty('--titanium-border', colors.titaniumBorder);
-  root.style.setProperty('--color-primary', colors.primaryColor);
-  root.style.setProperty('--color-bright', colors.primaryBright);
-  root.style.setProperty('--color-sheen', colors.primarySheen);
-  root.style.setProperty('--color-deep', colors.primaryDeep);
-  root.style.setProperty('--color-glow', colors.primaryGlow);
-  root.style.setProperty('--text-main', colors.textMain);
-  root.style.setProperty('--text-muted', colors.textMuted);
-
-  updatePlayButtonAnimation();
-  if (theme.animated) startRainbowAnimation();
-  
-  localStorage.setItem('selectedTheme', themeKey);
-  updateThemeListUI();
+function getLangPanelTitle(code) {
+  const base = code.split('-')[0];
+  const titles = {
+    en: 'Language', 'en-GB': 'Language', 'en-US': 'Language', 'en-AU': 'Language', 'en-CA': 'Language',
+    fr: 'Langue',   'fr-FR': 'Langue',   'fr-CA': 'Langue',   'fr-BE': 'Langue',   'fr-CH': 'Langue',
+    es: 'Idioma',   'es-ES': 'Idioma',   'es-MX': 'Idioma',   'es-AR': 'Idioma',   'es-CO': 'Idioma',
+    pt: 'Idioma',   'pt-BR': 'Idioma',   'pt-PT': 'Idioma',
+    zh: '语言',      'zh-CN': '语言',      'zh-TW': '語言',      'zh-HK': '語言',
+    ar: 'اللغة',    'ar-SA': 'اللغة',    'ar-EG': 'اللغة',    'ar-MA': 'اللغة',
+    de: 'Sprache',  'de-DE': 'Sprache',  'de-AT': 'Sprache',  'de-CH': 'Sprache',
+    ja: '言語', ko: '언어', ru: 'Язык',
+  };
+  return titles[code] || titles[base] || 'Language';
 }
+
+function toggleLangPanel() {
+  const isOpen = langPanel.classList.contains('open');
+  if (isOpen) {
+    langPanel.classList.remove('open');
+    langBtn.classList.remove('active');
+  } else {
+    // Close theme panel if open
+    themePanel.classList.remove('open');
+    themeBtn.classList.remove('active');
+    langPanel.classList.add('open');
+    langBtn.classList.add('active');
+  }
+}
+
+langBtn.addEventListener('click', toggleLangPanel);
+
+// Close lang panel when clicking outside (unchanged)
+document.addEventListener('click', (e) => {
+  if (!langPanel.contains(e.target) && !langBtn.contains(e.target)) {
+    if (langPanel.classList.contains('open')) {
+      langPanel.classList.remove('open');
+      langBtn.classList.remove('active');
+    }
+  }
+});
 
 function updateProgress() {
   if (!state.audio.paused) {
@@ -1844,6 +3237,91 @@ function updateProgress() {
   }
 }
 
+// Save custom languages & translations to localStorage
+function saveCustomLanguages() {
+  const customLangs = LANGUAGES.filter(lang => lang.custom === true);
+  
+  if (customLangs.length === 0) {
+    localStorage.removeItem('customMusicPlayerLanguages');
+    localStorage.removeItem('customMusicPlayerI18N');
+    console.log('No custom languages → cleared storage');
+    return;
+  }
+
+  const customData = customLangs.map(lang => ({
+    code: lang.code,
+    label: lang.label || lang.code.toUpperCase(),
+    flag: lang.flag || '🌐',
+    translations: I18N[lang.code] || {}
+  }));
+
+  try {
+    localStorage.setItem('customMusicPlayerLanguages', JSON.stringify(customData));
+    localStorage.setItem('customMusicPlayerI18N', JSON.stringify(I18N)); // full I18N backup as fallback
+    console.log(`Saved ${customLangs.length} custom language(s)`);
+  } catch (err) {
+    console.error('Failed to save custom languages:', err);
+  }
+}
+
+// Restore custom languages on page load
+function restoreCustomLanguages() {
+  const saved = localStorage.getItem('customMusicPlayerLanguages');
+  if (!saved) return;
+
+  try {
+    const customData = JSON.parse(saved);
+    if (customData.length > 0) {
+      // 1. Add the Header first
+      if (!LANGUAGES.find(l => l.group === 'Custom Languages')) {
+        LANGUAGES.push({ group: 'Custom Languages' });
+      }
+      
+      // 2. Add the custom languages
+      customData.forEach(item => {
+        if (!LANGUAGES.find(l => l.code === item.code)) {
+          LANGUAGES.push({
+            code: item.code,
+            label: item.label,
+            flag: item.flag,
+            custom: true
+          });
+          // Restore translations to the main I18N object
+          if (item.strings) {
+            I18N[item.code] = item.strings;
+          }
+        }
+      });
+    }
+  } catch (e) {
+    console.error("Error restoring languages", e);
+  }
+}
+
+function saveCustomThemes() {
+  const customThemes = {};
+  // Only save themes marked as custom
+  Object.keys(THEMES).forEach(key => {
+    if (THEMES[key].custom) {
+      customThemes[key] = THEMES[key];
+    }
+  });
+  localStorage.setItem('customMusicPlayerThemes', JSON.stringify(customThemes));
+}
+
+function restoreCustomThemes() {
+  const saved = localStorage.getItem('customMusicPlayerThemes');
+  if (!saved) return;
+
+  try {
+    const customThemes = JSON.parse(saved);
+    // Merge the saved custom themes back into the main THEMES object
+    Object.assign(THEMES, customThemes);
+  } catch (e) {
+    console.error("Error restoring custom themes:", e);
+  }
+}
+
 // Theme button event listener
 themeBtn.addEventListener('click', toggleThemePanel);
 
@@ -1854,6 +3332,15 @@ themeImportInput.addEventListener('change', (e) => {
     importTheme(file);
   }
   themeImportInput.value = '';
+});
+
+// Lang import input handler
+langImportInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    importLanguageFile(file);
+  }
+  langImportInput.value = '';
 });
 
 // Close theme panel when clicking outside
@@ -1867,10 +3354,16 @@ document.addEventListener('click', (e) => {
 
 // Initialize theme system
 document.addEventListener('DOMContentLoaded', () => {
-  // Load saved theme or use default
+  // 1. Restore data from LocalStorage first
+  restoreCustomThemes();
+  restoreCustomLanguages();
+
+  // 2. Then load settings and render
   const savedTheme = localStorage.getItem('selectedTheme') || state.currentTheme;
   applyTheme(savedTheme, false);
+  
   renderThemeList();
+  renderLangList();
 });
 
 state.audio.addEventListener('play', () => {
@@ -1888,3 +3381,5 @@ function update() {
 }
 
 requestAnimationFrame(update);
+
+window.addEventListener('beforeunload', saveCustomLanguages);
