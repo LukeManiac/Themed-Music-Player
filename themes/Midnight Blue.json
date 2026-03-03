@@ -1,0 +1,16 @@
+{
+  "name": "Midnight Blue",
+  "colors": {
+    "titaniumDark": "#05070a",
+    "titaniumLight": "#0d1117",
+    "titaniumBorder": "rgba(58, 110, 238, 0.15)",
+    "primaryColor": "#3a6eee",
+    "primaryBright": "#a5c0ff",
+    "primarySheen": "#7096f3",
+    "primaryDeep": "#1a3a8a",
+    "primaryGlow": "rgba(58, 110, 238, 0.4)",
+    "textMain": "#e6edf3",
+    "textMuted": "#7d8590"
+  },
+  "custom": true
+}

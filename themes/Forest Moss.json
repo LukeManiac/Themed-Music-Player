@@ -1,0 +1,16 @@
+{
+  "name": "Forest Moss",
+  "colors": {
+    "titaniumDark": "#0a0c0a",
+    "titaniumLight": "#141814",
+    "titaniumBorder": "rgba(74, 103, 65, 0.2)",
+    "primaryColor": "#4a6741",
+    "primaryBright": "#a8c69f",
+    "primarySheen": "#76946b",
+    "primaryDeep": "#2d3f28",
+    "primaryGlow": "rgba(74, 103, 65, 0.5)",
+    "textMain": "#f0f2f0",
+    "textMuted": "#8a948a"
+  },
+  "custom": true
+}

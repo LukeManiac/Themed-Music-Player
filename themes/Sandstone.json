@@ -1,0 +1,16 @@
+{
+  "name": "Sandstone",
+  "colors": {
+    "titaniumDark": "#0f0e0d",
+    "titaniumLight": "#1a1816",
+    "titaniumBorder": "rgba(210, 180, 140, 0.15)",
+    "primaryColor": "#d2b48c",
+    "primaryBright": "#f5deb3",
+    "primarySheen": "#e6ccac",
+    "primaryDeep": "#8b7355",
+    "primaryGlow": "rgba(210, 180, 140, 0.4)",
+    "textMain": "#faf7f2",
+    "textMuted": "#a8a198"
+  },
+  "custom": true
+}

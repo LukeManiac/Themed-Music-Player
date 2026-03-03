@@ -1,0 +1,16 @@
+{
+  "name": "Solar Gold",
+  "colors": {
+    "titaniumDark": "#0c0b05",
+    "titaniumLight": "#1a180d",
+    "titaniumBorder": "rgba(255, 191, 0, 0.15)",
+    "primaryColor": "#ffbf00",
+    "primaryBright": "#fff2cc",
+    "primarySheen": "#ffd966",
+    "primaryDeep": "#997300",
+    "primaryGlow": "rgba(255, 191, 0, 0.4)",
+    "textMain": "#fffcf5",
+    "textMuted": "#a6a086"
+  },
+  "custom": true
+}
