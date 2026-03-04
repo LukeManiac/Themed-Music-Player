@@ -3142,6 +3142,19 @@ function switchLanguage(code, silent = false) {
   // Re-apply all DOM translations
   applyI18nToDOM();
 
+  // Restore title/artist since applyI18nToDOM no longer touches these elements.
+  // When no track is loaded show placeholder; otherwise restore the actual track info.
+  if (state.currentIndex === -1) {
+    titleEl.textContent  = t('noTrackLoaded');
+    artistEl.textContent = t('dragDrop');
+  } else {
+    const track = state.playlist[state.currentIndex];
+    if (track) {
+      titleEl.textContent  = track.title || (track.src ? track.src.split('/').pop() : 'Untitled');
+      artistEl.textContent = track.artist || '';
+    }
+  }
+
   // Re-translate live status display
   const statusKeys = ['playing', 'paused', 'stopped', 'idle', 'loaded'];
   for (const key of statusKeys) {
@@ -3156,12 +3169,6 @@ function switchLanguage(code, silent = false) {
   shuffleBtn.title = state.shuffle ? t('shuffleOn') : t('shuffleOff');
   const repeatTitles = [t('repeatOff'), t('repeatAll'), t('repeatOne')];
   repeatBtn.title = repeatTitles[state.repeatMode];
-
-  // Update no-track state if no song loaded
-  if (state.currentIndex === -1) {
-    titleEl.textContent  = t('noTrackLoaded');
-    artistEl.textContent = t('dragDrop');
-  }
 
   // Update theme panel header
   document.querySelector('.theme-panel-header h3').textContent = t('themes');
