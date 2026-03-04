@@ -39,7 +39,9 @@ const I18N = {
     clearCacheYes: 'Yes',
     clearCacheNo: 'No',
     customLanguages: "Custom Languages",
+    customThemes: "Custom Themes",
     deleteLanguage: "Delete language",
+    deleteTheme: "Delete theme",
     themeNames: {
       'basic-titanium':  'Natural Titanium',
       'gothic-gold':     'Gothic Gold',
@@ -123,6 +125,9 @@ const I18N = {
     clearCacheYes: 'نعم',
     clearCacheNo: 'لا',
     customLanguages: "اللغات المخصصة",
+    customThemes: "السمات المخصصة",
+    deleteLanguage: "حذف اللغة",
+    deleteTheme: "حذف السمة",
     themeNames: {
       'basic-titanium':  'تيتانيوم طبيعي',
       'gothic-gold':     'ذهب قوطي',
@@ -206,6 +211,9 @@ const I18N = {
     clearCacheYes: 'Oui',
     clearCacheNo: 'Non',
     customLanguages: "Langues personnalisées",
+    customThemes: "Thèmes personnalisés",
+    deleteLanguage: "Supprimer la langue",
+    deleteTheme: "Supprimer le thème",
     themeNames: {
       'basic-titanium':  'Titane naturel',
       'gothic-gold':     'Or gothique',
@@ -289,6 +297,9 @@ const I18N = {
     clearCacheYes: 'Ja',
     clearCacheNo: 'Nein',
     customLanguages: "Benutzerdefinierte Sprachen",
+    customThemes: "Benutzerdefinierte Themen",
+    deleteLanguage: "Sprache löschen",
+    deleteTheme: "Thema löschen",
     themeNames: {
       'basic-titanium':  'Natürliches Titan',
       'gothic-gold':     'Gotisches Gold',
@@ -372,6 +383,9 @@ const I18N = {
     clearCacheYes: 'Sí',
     clearCacheNo: 'No',
     customLanguages: "Idiomas personalizados",
+    customThemes: "Temas personalizados",
+    deleteLanguage: "Eliminar idioma",
+    deleteTheme: "Eliminar tema",
     themeNames: {
       'basic-titanium':  'Titanio natural',
       'gothic-gold':     'Oro gótico',
@@ -455,6 +469,9 @@ const I18N = {
     clearCacheYes: '是',
     clearCacheNo: '否',
     customLanguages: "自定义语言",
+    customThemes: "自定义主题",
+    deleteLanguage: "删除语言",
+    deleteTheme: "删除主题",
     themeNames: {
       'basic-titanium':  '自然钛',
       'gothic-gold':     '哥特金',
@@ -538,6 +555,9 @@ const I18N = {
     clearCacheYes: 'はい',
     clearCacheNo: 'いいえ',
     customLanguages: "カスタム言語",
+    customThemes: "カスタムテーマ",
+    deleteLanguage: "言語を削除",
+    deleteTheme: "テーマを削除",
     themeNames: {
       'basic-titanium':  'ナチュラルチタン',
       'gothic-gold':     'ゴシックゴールド',
@@ -621,6 +641,9 @@ const I18N = {
     clearCacheYes: 'Sim',
     clearCacheNo: 'Não',
     customLanguages: "Idiomas personalizados",
+    customThemes: "Temas personalizados",
+    deleteLanguage: "Excluir idioma",
+    deleteTheme: "Excluir tema",
     themeNames: {
       'basic-titanium':  'Titânio natural',
       'gothic-gold':     'Ouro gótico',
@@ -704,6 +727,9 @@ const I18N = {
     clearCacheYes: '예',
     clearCacheNo: '아니오',
     customLanguages: "사용자 지정 언어",
+    customThemes: "사용자 지정 테마",
+    deleteLanguage: "언어 삭제",
+    deleteTheme: "테마 삭제",
     themeNames: {
       'basic-titanium':  '자연 티타늄',
       'gothic-gold':     '고딕 골드',
@@ -787,6 +813,9 @@ const I18N = {
     clearCacheYes: 'Да',
     clearCacheNo: 'Нет',
     customLanguages: "Пользовательские языки",
+    customThemes: "Пользовательские темы",
+    deleteLanguage: "Удалить язык",
+    deleteTheme: "Удалить тему",
     themeNames: {
       'basic-titanium':  'Натуральный титан',
       'gothic-gold':     'Готическое золото',
@@ -2861,7 +2890,7 @@ function renderThemeList() {
 
     item.addEventListener('dblclick', () => {
       if (theme.custom) {
-        if (confirm(`Delete theme "${theme.name}"?`)) {
+        if (confirm(`${t('deleteTheme')} "${theme.name}"?`)) {
           if (state.currentTheme === key) applyTheme('titanium', true);
           delete THEMES[key];
           saveCustomThemes();
@@ -2878,7 +2907,7 @@ function renderThemeList() {
   if (customKeys.length > 0) {
     const sep = document.createElement('div');
     sep.className = 'lang-group-header';
-    sep.textContent = 'Custom Themes';
+    sep.textContent = t('customThemes') || 'Custom Themes';
     themeList.appendChild(sep);
     customKeys.forEach(k => themeList.appendChild(makeThemeItem(k)));
   }
@@ -2935,7 +2964,7 @@ function deleteTheme(key) {
   const themeName = THEMES[key].name;
   
   // Confirmation dialog
-  if (!confirm(`Delete theme "${themeName}"?`)) return;
+  if (!confirm(`${t('deleteTheme')} "${themeName}"?`)) return;
 
   // If the user is currently using this theme, switch to default first
   if (state.currentTheme === key) {
