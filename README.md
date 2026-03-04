@@ -14,8 +14,6 @@ This is the best downloadable music player, giving you flexibility that no other
 
 ## Planned Features 🚀
 - **Equalizer** – fine-tune your audio output.
-- **Bass and Treble Filters** – adjust low and high frequencies for perfect sound.
-- **Effects** – add reverb, echo, and more to your music.
 - **Image Backgrounds for Custom Themes** – possibly adding video and GIF support in future updates.
 - **Customisable Looks** – choose from liquid glass, neon metal, titanium, and more.
 - **Resource Packs** – not just themes, but full asset packs to enhance your experience.
