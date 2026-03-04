@@ -1,0 +1,22 @@
+{
+  "name": "Nebula Cloud",
+  "animated": true,
+  "cycleTime": 8000,
+  "colorCycle": [
+    { "primaryColor": "#ff0080", "primaryBright": "#ffffff", "primarySheen": "#ff80bf", "primaryDeep": "#cc0066", "primaryGlow": "rgba(255, 0, 128, 0.5)" },
+    { "primaryColor": "#6600ff", "primaryBright": "#ffffff", "primarySheen": "#b380ff", "primaryDeep": "#4d00cc", "primaryGlow": "rgba(102, 0, 255, 0.5)" }
+  ],
+  "colors": {
+    "titaniumDark": "#05000a",
+    "titaniumLight": "#11001f",
+    "titaniumBorder": "rgba(255, 0, 128, 0.1)",
+    "primaryColor": "#ff0080",
+    "primaryBright": "#ffffff",
+    "primarySheen": "#ff80bf",
+    "primaryDeep": "#cc0066",
+    "primaryGlow": "rgba(255, 0, 128, 0.5)",
+    "textMain": "#faf0ff",
+    "textMuted": "#a096a6"
+  },
+  "custom": true
+}

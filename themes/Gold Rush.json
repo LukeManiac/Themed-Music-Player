@@ -1,0 +1,22 @@
+{
+  "name": "Gold Rush",
+  "animated": true,
+  "cycleTime": 1200,
+  "colorCycle": [
+    { "primaryColor": "#ffd700", "primaryBright": "#ffffff", "primarySheen": "#ffeb80", "primaryDeep": "#b8860b", "primaryGlow": "rgba(255, 215, 0, 0.7)" },
+    { "primaryColor": "#daa520", "primaryBright": "#ffd700", "primarySheen": "#f4a460", "primaryDeep": "#8b4513", "primaryGlow": "rgba(218, 165, 32, 0.4)" }
+  ],
+  "colors": {
+    "titaniumDark": "#0d0b00",
+    "titaniumLight": "#1a1600",
+    "titaniumBorder": "rgba(255, 215, 0, 0.1)",
+    "primaryColor": "#ffd700",
+    "primaryBright": "#ffffff",
+    "primarySheen": "#ffeb80",
+    "primaryDeep": "#b8860b",
+    "primaryGlow": "rgba(255, 215, 0, 0.7)",
+    "textMain": "#fffdf0",
+    "textMuted": "#a6a28a"
+  },
+  "custom": true
+}

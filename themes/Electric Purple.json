@@ -1,0 +1,16 @@
+{
+  "name": "Electric Purple",
+  "colors": {
+    "titaniumDark": "#09040d",
+    "titaniumLight": "#15091f",
+    "titaniumBorder": "rgba(191, 0, 255, 0.2)",
+    "primaryColor": "#bf00ff",
+    "primaryBright": "#efbfff",
+    "primarySheen": "#d966ff",
+    "primaryDeep": "#730099",
+    "primaryGlow": "rgba(191, 0, 255, 0.5)",
+    "textMain": "#f9f0ff",
+    "textMuted": "#a688b3"
+  },
+  "custom": true
+}

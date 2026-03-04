@@ -1,0 +1,16 @@
+{
+  "name": "Crimson Stealth",
+  "colors": {
+    "titaniumDark": "#0a0000",
+    "titaniumLight": "#1a0a0a",
+    "titaniumBorder": "rgba(220, 20, 60, 0.15)",
+    "primaryColor": "#dc143c",
+    "primaryBright": "#ff6b81",
+    "primarySheen": "#e84a5f",
+    "primaryDeep": "#800000",
+    "primaryGlow": "rgba(220, 20, 60, 0.5)",
+    "textMain": "#f8f0f0",
+    "textMuted": "#a68a8a"
+  },
+  "custom": true
+}

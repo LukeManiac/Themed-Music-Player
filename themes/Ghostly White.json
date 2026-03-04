@@ -1,0 +1,22 @@
+{
+  "name": "Ghostly White",
+  "animated": true,
+  "cycleTime": 4000,
+  "colorCycle": [
+    { "primaryColor": "#ffffff", "primaryBright": "#ffffff", "primarySheen": "#f0f0f0", "primaryDeep": "#cccccc", "primaryGlow": "rgba(255, 255, 255, 0.4)" },
+    { "primaryColor": "#888888", "primaryBright": "#aaaaaa", "primarySheen": "#999999", "primaryDeep": "#444444", "primaryGlow": "rgba(255, 255, 255, 0.1)" }
+  ],
+  "colors": {
+    "titaniumDark": "#0a0a0a",
+    "titaniumLight": "#151515",
+    "titaniumBorder": "rgba(255, 255, 255, 0.05)",
+    "primaryColor": "#ffffff",
+    "primaryBright": "#ffffff",
+    "primarySheen": "#f0f0f0",
+    "primaryDeep": "#cccccc",
+    "primaryGlow": "rgba(255, 255, 255, 0.4)",
+    "textMain": "#ffffff",
+    "textMuted": "#888888"
+  },
+  "custom": true
+}

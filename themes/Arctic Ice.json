@@ -1,0 +1,16 @@
+{
+  "name": "Arctic Ice",
+  "colors": {
+    "titaniumDark": "#0b0e12",
+    "titaniumLight": "#171c24",
+    "titaniumBorder": "rgba(0, 200, 255, 0.15)",
+    "primaryColor": "#00c8ff",
+    "primaryBright": "#ccf2ff",
+    "primarySheen": "#66deff",
+    "primaryDeep": "#007899",
+    "primaryGlow": "rgba(0, 200, 255, 0.4)",
+    "textMain": "#f0f9ff",
+    "textMuted": "#8ea2ab"
+  },
+  "custom": true
+}
