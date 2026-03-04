@@ -43,7 +43,7 @@
 }
 
 /* Base Reset */
-html, body {
+html, body, .player-wrapper {
   height: 100%;
   margin: 0;
   background: #080808;
@@ -284,6 +284,13 @@ input[type=range]::-webkit-slider-thumb:hover {
   transition: all 0.2s ease;
 }
 
+.btn .icon {
+  width: 20px;  /* Explicit size for non-play buttons */
+  height: 20px;
+  display: block; /* Prevents alignment-based collapsing */
+  overflow: visible; /* Ensures strokes aren't clipped */
+}
+
 .btn:hover {
   background: linear-gradient(180deg, #3a3a3d, #252528);
   border-color: rgba(255,255,255,0.15);
@@ -327,7 +334,16 @@ input[type=range]::-webkit-slider-thumb:hover {
   transform: rotate(30deg);
   pointer-events: none;
 }
-.btn.play .icon { width: 26px; height: 26px; fill: #000; filter: drop-shadow(0 1px 0 rgba(255,255,255,0.4)); }
+.btn.play .icon {
+  width: 26px;
+  height: 26px;
+}
+
+.btn svg[stroke] {
+  vector-effect: non-scaling-stroke;
+  /* Ensure the stroke is actually visible against the dark button */
+  stroke: var(--text-main); 
+}
 
 /* Toggle Buttons */
 .extra { display: flex; gap: 10px; justify-content: center; }
@@ -492,6 +508,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   font-weight: 500;
+  padding: 10px;
 }
 
 /* Responsive */

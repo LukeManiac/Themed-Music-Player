@@ -39,6 +39,7 @@ const I18N = {
     clearCacheYes: 'Yes',
     clearCacheNo: 'No',
     customLanguages: "Custom Languages",
+    deleteLanguage: "Delete language",
     themeNames: {
       'basic-titanium':  'Natural Titanium',
       'gothic-gold':     'Gothic Gold',
@@ -687,6 +688,7 @@ const I18N = {
     importLanguage: '언어 가져오기',
     invalidLangFile: '잘못된 언어 파일 형식',
     errorParsingLang: '언어 파일 파싱 오류: ',
+    uploadAudio: '오디오 업로드',
     designedIn: '캘리포니아에서 디자인',
     playerLabel: '음악 플레이어',
     seekLabel: '트랙 탐색',
@@ -769,6 +771,7 @@ const I18N = {
     importLanguage: 'Импорт языка',
     invalidLangFile: 'Неверный формат языкового файла',
     errorParsingLang: 'Ошибка чтения языкового файла: ',
+    uploadAudio: 'Загрузить аудио',
     designedIn: 'Разработано в Калифорнии',
     playerLabel: 'Музыкальный плеер',
     seekLabel: 'Перемотка',
@@ -829,8 +832,6 @@ const I18N = {
     },
   },
 };
-
-restoreCustomLanguages();
 
 /* ------- Regional variants (inherit from base, override where needed) ------- */
 (function() {
@@ -2299,6 +2300,7 @@ function showClearCacheModal() {
   }
 
   yesBtn.addEventListener('click', () => {
+    // Clear all localStorage including custom languages and themes
     localStorage.clear();
     location.reload();
   });
@@ -2760,9 +2762,6 @@ function importTheme(file) {
       // 4. Persistence & UI Update
       saveCustomThemes(); // Save to localStorage
       renderThemeList();  // Re-build the HTML list (including headers)
-      
-      // 5. Apply the theme immediately
-      applyTheme(themeKey, true);
 
       console.log(`Imported theme: ${themeData.name}`);
     } catch (err) {
@@ -2804,7 +2803,7 @@ function importLanguageFile(file) {
         custom: true // Ensure this flag is set!
       });
       
-      I18N[code] = data.translations || data;
+      I18N[code] = data.strings || data;
 
       // IMMEDIATE UPDATES
       saveCustomLanguages(); 
@@ -3022,6 +3021,9 @@ const LANGUAGES = [
   { code: 'ko',    label: '한국어',                 flag: '🇰🇷' },
   { code: 'ru',    label: 'Русский',               flag: '🇷🇺' },
 ];
+
+// Restore custom languages now that LANGUAGES array exists
+restoreCustomLanguages();
 
 const langBtn   = document.getElementById('langBtn');
 const langPanel = document.getElementById('langPanel');
@@ -3287,8 +3289,10 @@ function restoreCustomLanguages() {
             custom: true
           });
           // Restore translations to the main I18N object
-          if (item.strings) {
-            I18N[item.code] = item.strings;
+          if (item.translations) {
+            I18N[item.code] = item.translations;
+          } else if (item.strings) {
+            I18N[item.code] = item.strings; // legacy fallback
           }
         }
       });
@@ -3326,19 +3330,20 @@ function restoreCustomThemes() {
 themeBtn.addEventListener('click', toggleThemePanel);
 
 // Theme import input handler
-themeImportInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    importTheme(file);
+themeImportInput.addEventListener('change', async (e) => {
+  const files = Array.from(e.target.files || []);
+  for (let i = 0; i < files.length; i++) {
+    const isLast = i === files.length - 1;
+    await importTheme(files[i], isLast);
   }
   themeImportInput.value = '';
 });
 
 // Lang import input handler
-langImportInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    importLanguageFile(file);
+langImportInput.addEventListener('change', async (e) => {
+  const files = Array.from(e.target.files || []);
+  for (const file of files) {
+    await importLanguageFile(file);
   }
   langImportInput.value = '';
 });
@@ -3356,7 +3361,6 @@ document.addEventListener('click', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Restore data from LocalStorage first
   restoreCustomThemes();
-  restoreCustomLanguages();
 
   // 2. Then load settings and render
   const savedTheme = localStorage.getItem('selectedTheme') || state.currentTheme;
@@ -3382,4 +3386,5 @@ function update() {
 
 requestAnimationFrame(update);
 
-window.addEventListener('beforeunload', saveCustomLanguages);
+// Custom languages are saved immediately on import/delete — no beforeunload needed.
+// (A beforeunload save would re-write data back after a cache clear.)
