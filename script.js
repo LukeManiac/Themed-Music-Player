@@ -2002,7 +2002,8 @@ function loadTrack(index, opts={autoplay:false}){
   setupAudioContext();
   buildVisualiserBars(state.visualBars);
 
-  syncPlaybackStateFromAudio()
+  syncPlaybackStateFromAudio();
+  updateMediaSession();
 }
 
 /* ------- Playback controls ------- */
@@ -2236,7 +2237,7 @@ state.audio.addEventListener('pause', syncPlaybackStateFromAudio);
 state.audio.addEventListener('ended', syncPlaybackStateFromAudio);
 
 
-/* Keyboard support: space toggles play/pause */
+/* Keyboard support: space toggles play/pause, media keys for prev/next */
 window.addEventListener('keydown', (ev)=>{
   if(ev.code === 'Space' && (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')){
     ev.preventDefault();
@@ -2247,7 +2248,56 @@ window.addEventListener('keydown', (ev)=>{
     ev.preventDefault();
     showClearCacheModal();
   }
+  // Hardware/software media keys
+  if(ev.code === 'MediaTrackPrevious'){ ev.preventDefault(); jumpToPrev(); }
+  if(ev.code === 'MediaTrackNext')    { ev.preventDefault(); jumpToNext(); }
+  if(ev.code === 'MediaPlayPause')    { ev.preventDefault(); if(state.isPlaying) pauseAudio(); else playAudio(); }
+  if(ev.code === 'MediaStop')         { ev.preventDefault(); stopAudio(); }
 });
+
+/* ------- Media Session API (OS taskbar, lock screen, trackpad gestures) ------- */
+function updateMediaSession() {
+  if (!('mediaSession' in navigator)) return;
+
+  const track = state.playlist[state.currentIndex];
+  if (!track) return;
+
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title:  track.title  || 'Unknown Title',
+    artist: track.artist || '',
+    album:  '',
+    artwork: track.art
+      ? [{ src: track.art, sizes: '512x512', type: 'image/jpeg' }]
+      : []
+  });
+
+  // Wire OS-level transport controls → player functions
+  navigator.mediaSession.setActionHandler('play',          () => playAudio());
+  navigator.mediaSession.setActionHandler('pause',         () => pauseAudio());
+  navigator.mediaSession.setActionHandler('stop',          () => stopAudio());
+  navigator.mediaSession.setActionHandler('previoustrack', () => jumpToPrev());
+  navigator.mediaSession.setActionHandler('nexttrack',     () => jumpToNext());
+  navigator.mediaSession.setActionHandler('seekto', (details) => {
+    if (details.seekTime != null && isFinite(details.seekTime)) {
+      state.audio.currentTime = details.seekTime;
+    }
+  });
+  navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+    state.audio.currentTime = Math.max(0, state.audio.currentTime - (details.seekOffset || 5));
+  });
+  navigator.mediaSession.setActionHandler('seekforward', (details) => {
+    state.audio.currentTime = Math.min(
+      state.audio.duration || 0,
+      state.audio.currentTime + (details.seekOffset || 5)
+    );
+  });
+}
+
+// Keep the OS playback state badge in sync
+function syncMediaSessionPlaybackState() {
+  if (!('mediaSession' in navigator)) return;
+  navigator.mediaSession.playbackState = state.isPlaying ? 'playing' : 'paused';
+}
 
 function showClearCacheModal() {
   // Remove any existing modal
@@ -2436,6 +2486,8 @@ function syncPlaybackStateFromAudio(){
     if(state.rafId) cancelAnimationFrame(state.rafId);
     if (state.progressRafId) {cancelAnimationFrame(state.progressRafId); state.progressRafId = null}
   }
+
+  syncMediaSessionPlaybackState();
 }
 
 async function hashFile(file) {
