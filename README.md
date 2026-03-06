@@ -9,8 +9,9 @@ Welcome to **Themed Music Player**, the ultimate downloadable music player desig
 This is the best downloadable music player, giving you flexibility that no other player can match. No more $1K subscriptions just to load your favourite files.
 
 ## Issues ⚠️
-- Loading very large songs or too many tracks at once may cause lag.
+- Importing a large number of music files simultaneously can also cause heavy slowdown depending on your system.
 - This behaviour is not intentional, but something to be aware of while enjoying your music.
+- **Suggested workaround:** download the website source code and run it locally if you plan to load many music files, which can help reduce lag and improve performance.
 
 ## Planned Features 🚀
 - **Equalizer** – fine-tune your audio output.
