@@ -2770,37 +2770,38 @@ function exportTheme(themeKey) {
   URL.revokeObjectURL(url);
 }
 
+let _themeImportCounter = 0;
+
 function importTheme(file) {
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const themeData = JSON.parse(e.target.result);
-      
-      // 1. Validation: Ensure it has a name and colors
-      if (!themeData.name || !themeData.colors) {
-        throw new Error(t('invalidThemeFile'));
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const themeData = JSON.parse(e.target.result);
+        
+        // 1. Validation: Ensure it has a name and colors
+        if (!themeData.name || !themeData.colors) {
+          throw new Error(t('invalidThemeFile'));
+        }
+
+        // 2. Generate a unique key using a counter (not Date.now, which collides on bulk import)
+        const themeKey = 'custom-' + Date.now() + '-' + (++_themeImportCounter);
+        themeData.custom = true; 
+
+        // 3. Add to the global THEMES object
+        THEMES[themeKey] = themeData;
+
+        console.log(`Imported theme: ${themeData.name}`);
+      } catch (err) {
+        state.isChangingTheme = false; 
+        document.querySelector('.player').style.filter = '';
+        alert(t('errorParsingTheme') + err.message);
       }
-
-      // 2. Generate a unique key and force 'custom' flag
-      const themeKey = 'custom-' + Date.now();
-      themeData.custom = true; 
-
-      // 3. Add to the global THEMES object
-      THEMES[themeKey] = themeData;
-
-      // 4. Persistence & UI Update
-      saveCustomThemes(); // Save to localStorage
-      renderThemeList();  // Re-build the HTML list (including headers)
-
-      console.log(`Imported theme: ${themeData.name}`);
-    } catch (err) {
-      // If it fails, ensure the blur is removed
-      state.isChangingTheme = false; 
-      document.querySelector('.player').style.filter = '';
-      alert(t('errorParsingTheme') + err.message);
-    }
-  };
-  reader.readAsText(file);
+      resolve();
+    };
+    reader.onerror = () => resolve(); // Don't block the queue on read errors
+    reader.readAsText(file);
+  });
 }
 
 function exportLanguage(code) {
@@ -3368,10 +3369,12 @@ themeBtn.addEventListener('click', toggleThemePanel);
 // Theme import input handler
 themeImportInput.addEventListener('change', async (e) => {
   const files = Array.from(e.target.files || []);
-  for (let i = 0; i < files.length; i++) {
-    const isLast = i === files.length - 1;
-    await importTheme(files[i], isLast);
+  for (const file of files) {
+    await importTheme(file);
   }
+  // Save and re-render once after ALL themes are imported
+  saveCustomThemes();
+  renderThemeList();
   themeImportInput.value = '';
 });
 
