@@ -3397,11 +3397,18 @@ document.addEventListener('click', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Restore data from LocalStorage first
   restoreCustomThemes();
+  restoreCustomLanguages();
 
   // 2. Then load settings and render
   const savedTheme = localStorage.getItem('selectedTheme') || state.currentTheme;
   applyTheme(savedTheme, false);
-  
+
+  // 3. Restore saved language (silent=true to avoid redundant re-renders)
+  const savedLang = localStorage.getItem('selectedLang');
+  if (savedLang) {
+    switchLanguage(savedLang, true);
+  }
+
   renderThemeList();
   renderLangList();
 });
