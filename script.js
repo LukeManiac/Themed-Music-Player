@@ -1326,7 +1326,8 @@ const state = {
   isSeeking: false,
   currentTheme: 'gothic-gold', // Default theme (matches the original design)
   rainbowInterval: null,
-  rainbowIndex: 0
+  rainbowIndex: 0,
+  statusKey: 'idle'
 };
 
 /* ------- Elements ------- */
@@ -1355,6 +1356,11 @@ const themePanel = document.getElementById('themePanel');
 const themeList = document.getElementById('themeList');
 const themeImportInput = document.getElementById('themeImportInput');
 const langImportInput  = document.getElementById('langImportInput');
+
+function setStatus(key) {
+  state.statusKey = key;
+  statusDisplay.textContent = t(key);
+}
 
 state.isChangingTheme = false
 let progressAnimationId;
@@ -1991,7 +1997,7 @@ function loadTrack(index, opts={autoplay:false}){
   refreshActiveTrackUI();
   scrollActiveTrackIntoView(); // ✅ ADD THIS
 
-  statusDisplay.textContent = t('loaded');
+  setStatus('loaded');
 
   if(opts.autoplay){
     playAudio();
@@ -2016,7 +2022,7 @@ function playAudio(){
 
   state.audio.play().catch(err=>{
     console.warn('Play prevented', err);
-    statusDisplay.textContent = t('playBlocked');
+    setStatus('playBlocked');
   });
 }
 
@@ -2028,7 +2034,7 @@ function stopAudio(){
   state.audio.pause();
   state.audio.currentTime = 0;
   state.isPlaying = false;
-  statusDisplay.textContent = t('stopped');
+  setStatus('stopped');
   seekRange.value = 0;
   syncPlaybackStateFromAudio();
   togglePlayIcon(false);
@@ -2476,13 +2482,13 @@ function syncPlaybackStateFromAudio(){
   playBtn.setAttribute('aria-pressed', String(playing));
 
   if(playing){
-    statusDisplay.textContent = t('playing');
+    setStatus('playing');
     if(state.analyser) startVisualiser();
     if (!state.progressRafId) {
       state.progressRafId = requestAnimationFrame(updateProgress);
     }
   } else {
-    statusDisplay.textContent = state.audio.ended ? t('stopped') : t('paused');
+    setStatus(state.audio.ended ? 'stopped' : 'paused');
     if(state.rafId) cancelAnimationFrame(state.rafId);
     if (state.progressRafId) {cancelAnimationFrame(state.progressRafId); state.progressRafId = null}
   }
@@ -3237,14 +3243,9 @@ function switchLanguage(code, silent = false) {
     }
   }
 
-  // Re-translate live status display
-  const statusKeys = ['playing', 'paused', 'stopped', 'idle', 'loaded'];
-  for (const key of statusKeys) {
-    const matchesAnyLang = Object.values(I18N).some(l => l[key] === statusDisplay.textContent);
-    if (matchesAnyLang) {
-      statusDisplay.textContent = t(key);
-      break;
-    }
+  // Re-translate live status display using the stored key
+  if (state.statusKey) {
+    statusDisplay.textContent = t(state.statusKey);
   }
 
   // Update shuffle/repeat button titles
