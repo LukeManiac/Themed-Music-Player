@@ -1568,9 +1568,9 @@ function renderPlaylist() {
     trash.style.pointerEvents = 'none';
     el.appendChild(trash);
 
-    // Single tap: load track
+    // Single tap: load track (preserves current playing/paused state)
     el.addEventListener('click', () => {
-      loadTrack(index, { autoplay: true });
+      loadTrack(index, { autoplay: 'inherit' });
       scrollActiveTrackIntoView();
     });
 
@@ -1995,11 +1995,17 @@ function loadTrack(index, opts={autoplay:false}){
   }
 
   refreshActiveTrackUI();
-  scrollActiveTrackIntoView(); // ✅ ADD THIS
+  scrollActiveTrackIntoView();
 
+  state.isStopped = false; // reset stopped flag when loading a new track
   setStatus('loaded');
 
-  if(opts.autoplay){
+  // Determine whether to play: explicit autoplay flag, or preserve current playing state
+  const shouldPlay = opts.autoplay === true ? true
+                   : opts.autoplay === false ? false
+                   : state.isPlaying; // 'inherit' — keep current state
+
+  if(shouldPlay){
     playAudio();
   } else {
     pauseAudio();
@@ -2031,9 +2037,11 @@ function pauseAudio(){
 }
 
 function stopAudio(){
+  if(!state.audio.src) return; // no track loaded — do nothing
   state.audio.pause();
   state.audio.currentTime = 0;
   state.isPlaying = false;
+  state.isStopped = true;
   setStatus('stopped');
   seekRange.value = 0;
   syncPlaybackStateFromAudio();
@@ -2482,13 +2490,21 @@ function syncPlaybackStateFromAudio(){
   playBtn.setAttribute('aria-pressed', String(playing));
 
   if(playing){
+    state.isStopped = false; // clear stopped flag when playback resumes
     setStatus('playing');
     if(state.analyser) startVisualiser();
     if (!state.progressRafId) {
       state.progressRafId = requestAnimationFrame(updateProgress);
     }
   } else {
-    setStatus(state.audio.ended ? 'stopped' : 'paused');
+    // Determine correct non-playing status
+    if(state.audio.ended){
+      setStatus('stopped');
+    } else if(state.isStopped){
+      setStatus('stopped');
+    } else {
+      setStatus('paused');
+    }
     if(state.rafId) cancelAnimationFrame(state.rafId);
     if (state.progressRafId) {cancelAnimationFrame(state.progressRafId); state.progressRafId = null}
   }
