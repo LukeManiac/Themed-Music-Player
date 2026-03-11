@@ -1568,9 +1568,9 @@ function renderPlaylist() {
     trash.style.pointerEvents = 'none';
     el.appendChild(trash);
 
-    // Single tap: load track (preserves current playing/paused state)
+    // Single tap: load track (always autoplay on manual track selection)
     el.addEventListener('click', () => {
-      loadTrack(index, { autoplay: 'inherit' });
+      loadTrack(index, { autoplay: true });
       scrollActiveTrackIntoView();
     });
 
@@ -2014,7 +2014,6 @@ function loadTrack(index, opts={autoplay:false}){
   setupAudioContext();
   buildVisualiserBars(state.visualBars);
 
-  syncPlaybackStateFromAudio();
   updateMediaSession();
 }
 
@@ -2072,11 +2071,8 @@ function jumpToNext(){
     return;
   }
   if(state.currentIndex >= state.playlist.length - 1){
-    if(state.repeatMode === 1){ // repeat all
-      loadTrack(0, {autoplay:true});
-    } else {
-      stopAudio();
-    }
+    // Always wrap to first track when jumping next from last track
+    loadTrack(0, {autoplay:true});
   } else {
     loadTrack(state.currentIndex + 1, {autoplay:true});
   }
@@ -2100,14 +2096,9 @@ function jumpToPrev(){
     return;
   }
 
-  // Normal previous-track behaviour
+  // Normal previous-track behaviour — always wrap to last track when on first
   if(state.currentIndex <= 0){
-    if(state.repeatMode === 1){
-      loadTrack(state.playlist.length - 1, { autoplay: true });
-    } else {
-      state.audio.currentTime = 0;
-      playAudio();
-    }
+    loadTrack(state.playlist.length - 1, { autoplay: true });
   } else {
     loadTrack(state.currentIndex - 1, { autoplay: true });
   }
