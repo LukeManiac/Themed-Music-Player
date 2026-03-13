@@ -1576,7 +1576,6 @@ function renderPlaylist() {
 
     // Right-click: remove track
     el.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
       removeTrack(index);
     });
 
@@ -2190,17 +2189,48 @@ seekRange.addEventListener('input', (e)=>{
 });
 
 /* Load local file(s) */
-fileInput.addEventListener('change', async (ev)=>{
+/** Read artwork + basic tags from an audio File via jsmediatags */
+function readAudioMetadata(file) {
+  return new Promise((resolve) => {
+    if (typeof jsmediatags === 'undefined') {
+      resolve({ title: null, artist: null, art: null });
+      return;
+    }
+    jsmediatags.read(file, {
+      onSuccess(tag) {
+        const tags = tag.tags || {};
+        let artUrl = null;
+        const picture = tags.picture;
+        if (picture && picture.data) {
+          const bytes = new Uint8Array(picture.data);
+          const blob  = new Blob([bytes], { type: picture.format || 'image/jpeg' });
+          artUrl = URL.createObjectURL(blob);
+        }
+        resolve({
+          title:  tags.title  || null,
+          artist: tags.artist || null,
+          art:    artUrl
+        });
+      },
+      onError() {
+        resolve({ title: null, artist: null, art: null });
+      }
+    });
+  });
+}
+
+fileInput.addEventListener('change', async (ev) => {
   const files = Array.from(ev.target.files || []);
   for (const f of files) {
-    const url = URL.createObjectURL(f);
+    const url  = URL.createObjectURL(f);
     const hash = await hashFile(f);
+    const meta = await readAudioMetadata(f);
 
     addTrackToPlaylist({
-      src: url,
-      title: f.name.replace(/\.[^/.]+$/, ""),
-      artist: '',
-      art: '',
+      src:    url,
+      title:  meta.title  || f.name.replace(/\.[^/.]+$/, ''),
+      artist: meta.artist || '',
+      art:    meta.art    || '',
       hash
     });
   }
@@ -2950,7 +2980,6 @@ function renderThemeList() {
 
     // Right click: Save/Export theme
     item.addEventListener('contextmenu', (e) => {
-      e.preventDefault(); // Stop the default browser right-click menu
       exportTheme(key); // Trigger the download
     });
 
@@ -3185,7 +3214,6 @@ function renderLangList() {
 
     // Right-click: export
     item.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
       exportLanguage(code);
     });
 
@@ -3491,6 +3519,8 @@ function update() {
 }
 
 requestAnimationFrame(update);
+
+document.addEventListener("contextmenu", (e) => e.preventDefault());
 
 // Custom languages are saved immediately on import/delete — no beforeunload needed.
 // (A beforeunload save would re-write data back after a cache clear.)
