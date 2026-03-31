@@ -172,6 +172,12 @@ html, body, .player-wrapper {
   font-weight: 400;
 }
 
+.album {
+  font-size: 9px;
+  color: var(--text-muted);
+  font-weight: 200;
+}
+
 /* Visualiser - Pure Bright Gold */
 .visualiser {
   flex-grow: 1;

@@ -1345,6 +1345,7 @@ const statusDisplay = document.getElementById('statusDisplay');
 const playlistEl = document.getElementById('playlist');
 const titleEl = document.getElementById('title');
 const artistEl = document.getElementById('artist');
+const albumEl = document.getElementById('album');
 const albumArtImg = document.getElementById('albumArtImg');
 const musicNoteSVG = document.getElementById('musicNoteSVG');
 const visualiser = document.getElementById('visualiser');
@@ -1544,6 +1545,9 @@ function renderPlaylist() {
         </div>
         <div style="font-size:12px; color:rgba(235,245,255,0.7); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
           ${escapeHtml(track.artist || '')}
+        </div>
+        <div style="font-size:10px; color:rgba(237,239,255,0.4); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+          ${escapeHtml(track.album || '')}
         </div>
       </div>
     `;
@@ -1811,6 +1815,7 @@ function removeTrack(index, skipAnimation = false){
         state.audio.src = '';
         titleEl.textContent = t('noSongLoaded');
         artistEl.textContent = t('dropAudioFile');
+        albumEl.textContent = '';
         albumArtImg.style.display = 'none';
         musicNoteSVG.style.display = 'block';
         seekRange.value = 0;
@@ -1834,6 +1839,7 @@ function removeTrack(index, skipAnimation = false){
       state.audio.src = '';
       titleEl.textContent = t('noSongLoaded');
       artistEl.textContent = t('dropAudioFile');
+      albumEl.textContent = '';
       albumArtImg.style.display = 'none';
       musicNoteSVG.style.display = 'block';
       seekRange.value = 0;
@@ -1983,6 +1989,7 @@ function loadTrack(index, opts={autoplay:false}){
 
   titleEl.textContent = track.title || (track.src.split('/').pop() || 'Untitled');
   artistEl.textContent = track.artist || '';
+  albumEl.textContent = track.album || '';
 
   if(track.art){
     albumArtImg.src = track.art;
@@ -2193,7 +2200,7 @@ seekRange.addEventListener('input', (e)=>{
 function readAudioMetadata(file) {
   return new Promise((resolve) => {
     if (typeof jsmediatags === 'undefined') {
-      resolve({ title: null, artist: null, art: null });
+      resolve({ title: null, artist: null, album: null , art: null});
       return;
     }
     jsmediatags.read(file, {
@@ -2209,11 +2216,12 @@ function readAudioMetadata(file) {
         resolve({
           title:  tags.title  || null,
           artist: tags.artist || null,
+          album:  tags.album  || null,
           art:    artUrl
         });
       },
       onError() {
-        resolve({ title: null, artist: null, art: null });
+        resolve({ title: null, artist: null, album: null , art: null });
       }
     });
   });
@@ -2230,6 +2238,7 @@ fileInput.addEventListener('change', async (ev) => {
       src:    url,
       title:  meta.title  || f.name.replace(/\.[^/.]+$/, ''),
       artist: meta.artist || '',
+      album:  meta.album  || '',
       art:    meta.art    || '',
       hash
     });
@@ -2300,7 +2309,7 @@ function updateMediaSession() {
   navigator.mediaSession.metadata = new MediaMetadata({
     title:  track.title  || 'Unknown Title',
     artist: track.artist || '',
-    album:  '',
+    album:  track.album  || '',
     artwork: track.art
       ? [{ src: track.art, sizes: '512x512', type: 'image/jpeg' }]
       : []
@@ -2457,6 +2466,7 @@ leftPanel.addEventListener('drop', async (e)=>{
         src: url,
         title: file.name,
         artist: '',
+        album: '',
         art: '',
         hash
       });
@@ -3270,11 +3280,13 @@ function switchLanguage(code, silent = false) {
   if (state.currentIndex === -1) {
     titleEl.textContent  = t('noTrackLoaded');
     artistEl.textContent = t('dragDrop');
+    albumEl.textContent  = '';
   } else {
     const track = state.playlist[state.currentIndex];
     if (track) {
       titleEl.textContent  = track.title || (track.src ? track.src.split('/').pop() : 'Untitled');
       artistEl.textContent = track.artist || '';
+      albumEl.textContent  = track.album || '';
     }
   }
 
