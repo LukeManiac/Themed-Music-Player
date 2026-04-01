@@ -3533,6 +3533,3 @@ function update() {
 requestAnimationFrame(update);
 
 document.addEventListener("contextmenu", (e) => e.preventDefault());
-
-// Custom languages are saved immediately on import/delete — no beforeunload needed.
-// (A beforeunload save would re-write data back after a cache clear.)
