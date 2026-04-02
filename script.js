@@ -1316,7 +1316,6 @@ const state = {
   repeatMode: 0, // 0=off, 1=all, 2=one
   animCurve: null,
   animSpeed: null,
-  animLabel: null,
   visualBars: DEFAULT_BARS,
   analyser: null,
   audioContext: null,
@@ -1349,7 +1348,6 @@ const albumEl = document.getElementById('album');
 const albumArtImg = document.getElementById('albumArtImg');
 const musicNoteSVG = document.getElementById('musicNoteSVG');
 const visualiser = document.getElementById('visualiser');
-const animLabel = document.getElementById('animLabel');
 const curveLabel = document.getElementById('curveLabel');
 const liquidBlob = document.getElementById('liquidBlob');
 const themeBtn = document.getElementById('themeBtn');
@@ -1402,7 +1400,6 @@ function initRandomAnimations(){
   const speed = chooseRandom(ANIMATION_SPEEDS);
   state.animCurve = curve;
   state.animSpeed = speed;
-  animLabel.textContent = `${curve}-${speed}`;
   curveLabel.textContent = `${curve} / ${speed}`;
 
   // Apply to liquid blob: transform scale + rotate animated with randomised duration & easing
@@ -2498,10 +2495,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
   // Build placeholder visualiser bars
   buildVisualiserBars(state.visualBars);
-
-  // show initial labels
-  animLabel.textContent = state.animLabel || (state.animCurve + '-' + state.animSpeed);
-  curveLabel.textContent = `${state.animCurve || '—'}`;
 
   // Make sure play does not auto-start; audio.preload set to 'metadata' above
 
