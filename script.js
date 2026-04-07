@@ -3526,3 +3526,33 @@ function update() {
 requestAnimationFrame(update);
 
 document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+// Prevent the browser from opening the file when dropped
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  window.addEventListener(eventName, (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }, false);
+});
+
+// Update the playlist element to handle the file drop
+playlistEl.addEventListener('drop', async (e) => {
+  const files = Array.from(e.dataTransfer.files);
+  if (files.length > 0) {
+    for (const f of files) {
+      if (f.type.startsWith('audio/')) {
+        const url = URL.createObjectURL(f);
+        // Re-use your existing metadata and add logic from snippet_18
+        const meta = await readAudioMetadata(f);
+        addTrackToPlaylist({
+          src: url,
+          title: meta.title || f.name.replace(/\.[^/.]+$/, ''),
+          artist: meta.artist || '',
+          album: meta.album || '',
+          art: meta.art || '',
+          hash: f.name + f.size // Simple hash for duplicates
+        });
+      }
+    }
+  }
+});
